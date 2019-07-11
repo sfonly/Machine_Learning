@@ -9,8 +9,8 @@ import pandas as pd
 import operator
 
 # 读取csv数据
-def loadDataSet(name = 'iris.csv', columns):
-    path = 'C://Users/sf_on/Desktop/数据科学平台实验手册/CART决策树/'
+def loadDataSet(url, name, columns):
+    path = url
     dataSet = pd.read_csv(path + name, header = None, names = columns)
     return dataSet
 
@@ -142,6 +142,6 @@ def createTree(dataSet):
 
 # 主函数，程序入口
 if __name__ == '__main__':
-    dataSet = loadDataSet()
+    dataSet = loadDataSet(url, filename, columns)
     dataSet._convert(float)
     print(createTree(dataSet))
