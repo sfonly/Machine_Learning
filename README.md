@@ -1,7 +1,5 @@
-# Machine_Learning
-Learning Notes
+#机器学习的学习笔记
 
-#学习机器学习的笔记
-
+##1 学习结构
 
 
