@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Filename: NaiveBayes_wine.py
+# Filename: SVM_Heartdisease.py
 """
 Created on Mon Jun 17 10:36:16 2019
 
