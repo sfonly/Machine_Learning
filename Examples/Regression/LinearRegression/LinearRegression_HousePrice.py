@@ -8,7 +8,7 @@ This is a temporary script file.
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np 
-data = pd.read_csv('./HousePrice.csv')
+data = pd.read_csv(open('./HousePrice.csv'))
 # 读入数据
 
 #data.isnull().any().sum()
