@@ -66,7 +66,7 @@ def feature_matrix_show(data):
 
 def loadData():
     columns = ['sepal_length','sepal_width','petal_length','petal_width','class']
-    data = pd.read_csv(open('C://Users/sf_on/Desktop/数据挖掘应用分析实验手册/C4.5/iris.csv'),header=None,names = columns)
+    data = pd.read_csv(open('./iris.csv'),header=None,names = columns)
     return data
 
 if __name__ == '__main__':
