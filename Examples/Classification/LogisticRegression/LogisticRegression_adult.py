@@ -9,16 +9,29 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np 
 import seaborn as sns
+from sklearn import model_selection
+from sklearn.naive_bayes import GaussianNB
+from sklearn import metrics
+from sklearn.metrics import confusion_matrix,accuracy_score,f1_score,roc_curve, auc
+from sklearn.model_selection import KFold
+from sklearn.linear_model import LogisticRegression
+from imblearn.over_sampling import ADASYN
+
 
 columns=['age','workclass','fnlwgt','education','education_num','marital_status','occupation',
          'relationship','race','sex','capital_gain','capital_loss',
          'hours_per_week' ,'native_country','rich']
-data = pd.read_csv(open('./adult_data.csv'),header = None, names = columns)
+data = pd.read_csv(open('C://Users/sf_on/Desktop/数据挖掘应用分析实验手册/逻辑回归/adult_data.csv'),header = None, names = columns)
 
 # 查看数据集中是否存在空值
 print(data.isnull().sum())
 
 # 去除空值
+# 由于存在空值的列是workclass、occupation、native_country 
+# 这三列，都是标称类属性，且与其他列的关联性较弱，不好做关联插值
+# workclass 有1836个空值，occupation 1843个空值，native_country 有 583个空值,共计2399个空值
+# 缺失样本条数占总数据样本8%左右，影响不大
+# 因此，这里我们直接将其去除
 def deletNull(data):
     # 获取数据集中空值的列，并将其转换为list输出
     i_ = data[data.workclass.isnull()].index.tolist()
@@ -27,86 +40,149 @@ def deletNull(data):
     # 将多个list合并
     i_ = i_ + j_ + l_
     i_ = list(set(i_))
+    print('data.isnull.length:', len(i_))
     i_.sort()
     #将存在空值的行drop掉
     data.drop(i_,axis=0,inplace=True)
 deletNull(data)
 
 # 查看数据特征
+# 可以看出样本中，poor和rich的人数比率差别较大，并且由于后续分析主要关注谁会变得富有，因此我们关注比率的指标
 print(data.describe())
 print('poor: ' + str(data[data.rich ==0].index.size))
 print('rich: ' + str(data[data.rich ==1].index.size))
 
-# 探索数值型变量 hours_per_week 特征
-s = np.sort(data.hours_per_week.unique())
-print(data['hours_per_week'][data.rich ==0].describe())
-print(data['hours_per_week'][data.rich ==1].describe())
 
-sns.boxplot(x = 'rich', y = 'age',data = data)
-plt.show()
-
-#labels = data.groupby('age').size().index
-#groups = data.groupby('age')
-
-# 获取离散型变量，每个特征的具体类别和类标号之间的数值关系
-# 输入特征的名称，如‘age’输出结果
-#    feature    rich_0    rich_1
-#    17         328       0
-#    18         447       0
-#    ......
-# 结果作为dataframe输出
-def num(varible, data):
-#   var = '\''+ varible + '\''
-    temp = pd.DataFrame(columns=('rich_0','rich_1'))
-    temp_0 = data[data.rich == 0].groupby(varible)
-    temp_1 = data[data.rich == 1].groupby(varible)
-    temp['rich_0'] = temp_0.size()
-    temp['rich_1'] = temp_1.size()
-    temp = temp.replace(np.nan,0)
-    return temp
-
-# 根据输入的特征，做并列直方图，分析特征和类标号的关联
-def pic(varible):
-    tick_label = varible.index.tolist()
-    #绘制并列柱状图
-    x=np.arange(varible.index.size)#柱状图在横坐标上的位置
-    bar_width=0.3#设置柱状图的宽度
-    plt.subplots(figsize=(20,10))
-    plt.bar(x,varible['rich_0'],bar_width,color='salmon',label='rich_0')
-    plt.bar(x+bar_width,varible['rich_1'],bar_width,color='orchid',label='rich_1')
-    plt.legend()#显示图例，即label
-    plt.xticks(x+bar_width/2,tick_label)#显示x坐标轴的标签,即tick_label,调整位置，使其落在两个直方图中间位置
+# 数据探索性分析
+# ----------------------------------------------------
+# age 和 rich
+def show_age_rich():
+    g = sns.kdeplot(data['age'][(data['rich']==0)],color='Red',shade=True)
+    g = sns.kdeplot(data['age'][(data['rich']==1)],color='Blue',shade=True,ax=g)
+    g.set_xlabel('age')
+    g.set_ylabel('Frequency')
+    g = g.legend(['poor','rich'])
     plt.show()
-    print(varible)    
+show_age_rich()
 
-# 并发作图，同时执行所有离散变量的任务
-def show_label():
-    num_age = num('age', data)
-    pic(num_age)
-    num_workclass = num('workclass', data)
-    pic(num_workclass)
-    num_education = num('education', data)
-    pic(num_education)
-    num_education_num = num('education_num', data)
-    pic(num_education_num)
-    num_marital_status = num('marital_status', data)
-    pic(num_marital_status)
-    num_occupation = num('occupation', data)
-    pic(num_occupation)
-    num_relationship = num('relationship', data)
-    pic(num_relationship)
-    num_race = num('race', data)
-    pic(num_race)
-    num_sex = num('sex', data)
-    pic(num_sex)
-    num_hours_per_week = num('hours_per_week', data)
-    pic(num_hours_per_week)
-    num_native_country = num('native_country', data)
-    pic(num_native_country)
-show_label()
+# workclass 和 rich
+def show_workclass_rich():
+    plt.figure(figsize=(10,4))
+    g = sns.barplot(data=data,x='workclass',y='rich')
+    g.set_ylabel('Survival Probability')
+    plt.show()
+show_workclass_rich()
+
+# education 和 rich
+def show_education_rich():
+    plt.figure(figsize=(15,4))
+    g = sns.barplot(data=data,x='education',y='rich')
+    g.set_ylabel('Survival Probability')
+    plt.show()
+show_education_rich()
+
+# education_num 和 rich
+def show_education_num_rich():
+    plt.figure(figsize=(15,4))
+    g = sns.barplot(data=data,x='education_num',y='rich')
+    g.set_ylabel('Survival Probability')
+    plt.show()
+show_education_num_rich()
+
+# marital_status 和 rich
+def show_marital_status_rich():
+    plt.figure(figsize=(11,4))
+    g = sns.barplot(data=data,x='marital_status',y='rich')
+    g.set_ylabel('Survival Probability')
+    plt.show()
+show_marital_status_rich()
+
+# occupation 和 rich
+def show_occupation_rich():
+    plt.figure(figsize=(22,4))
+    g = sns.barplot(data=data,x='occupation',y='rich')
+    g.set_ylabel('Survival Probability')
+    plt.show()
+show_occupation_rich()
+
+# relationship 和 rich
+def show_relationship_rich():
+    plt.figure(figsize=(8,4))
+    g = sns.barplot(data=data,x='relationship',y='rich')
+    g.set_ylabel('Survival Probability')
+    plt.show()
+show_relationship_rich()
+
+# race 和 rich
+def show_race_rich():
+    plt.figure(figsize=(9,4))
+    g = sns.barplot(data=data,x='race',y='rich')
+    g.set_ylabel('Survival Probability')
+    plt.show()
+show_race_rich()
+
+# sex 和 rich
+def show_sex_rich():
+    g = sns.barplot(data=data,x='sex',y='rich')
+    g.set_ylabel('Survival Probability')
+    plt.show()
+show_sex_rich()
+
+# hours_per_week 和 rich
+def show_hours_per_week_rich():
+    plt.figure(figsize=(9,4))
+    g = sns.kdeplot(data['hours_per_week'][(data['rich']==0)],color='Red',shade=True)
+    g = sns.kdeplot(data['hours_per_week'][(data['rich']==1)],color='Blue',shade=True,ax=g)
+    g.set_xlabel('hours_per_week')
+    g.set_ylabel('Frequency')
+    g = g.legend(['poor','rich'])
+    plt.show()
+show_hours_per_week_rich()
+
+# native_country 和 rich
+def show_native_country_rich():
+    plt.figure(figsize=(40,4))
+    g = sns.barplot(data=data,x='native_country',y='rich')
+    g.set_ylabel('Survival Probability')
+    plt.show()
+show_native_country_rich()
+
+
+# =============================================================================
+# def num(varible, data):
+# #   var = '\''+ varible + '\''
+#     temp = pd.DataFrame(columns=('rich_0','rich_1'))
+#     temp_0 = data[data.rich == 0].groupby(varible)
+#     temp_1 = data[data.rich == 1].groupby(varible)
+#     temp['rich_0'] = temp_0.size()
+#     temp['rich_1'] = temp_1.size()
+#     temp = temp.replace(np.nan,0)
+#     return temp
+# 
+# # 根据输入的特征，做并列直方图，分析特征和类标号的关联
+# def pic(varible):
+#     tick_label = varible.index.tolist()
+#     #绘制并列柱状图
+#     x=np.arange(varible.index.size)#柱状图在横坐标上的位置
+#     bar_width=0.3#设置柱状图的宽度
+#     plt.subplots(figsize=(10,6))
+#     plt.bar(x,varible['rich_0'],bar_width,color='salmon',label='rich_0')
+#     plt.bar(x+bar_width,varible['rich_1'],bar_width,color='orchid',label='rich_1')
+#     plt.legend()#显示图例，即label
+#     plt.xticks(x+bar_width/2,tick_label)#显示x坐标轴的标签,即tick_label,调整位置，使其落在两个直方图中间位置
+#     plt.show()
+# 
+# # 作图
+# def show_label(colomns):
+#     for col in colomns:
+#         num_col = num(col, data)
+#         pic(num_col)
+# =============================================================================
+
 
 # 将特征传递给x，将类标号传递给y
-x = data[['age', 'workclass', 'education','education_num','marital_status','occupation', 'race','sex','hours_per_week', 'native_country']]
+x = data[['age', 'workclass', 'education','education_num','marital_status','occupation',
+          'race','sex','hours_per_week', 'native_country']]
 y = data[['rich']]
 columns = ['workclass', 'education','marital_status', 'occupation', 'race','sex', 'native_country']
 
@@ -127,20 +203,6 @@ def numerization(x, columns):
             j = j + 1
 numerization(x, columns)
 
-sns.boxplot(x = 'education', y = 'education_num',data = x)
-
-# 探索数值型变量age特征,并对其进行分箱
-s = np.sort(x.age.unique())
-x.age.plot(kind='hist', xlim=(15,100),bins = x.age.unique().size)
-print(x.age.describe())
-bins = [1, 26, 33, 40, 49, 100]
-age_bin = pd.cut(x.age, bins)
-print(pd.value_counts(age_bin))
-labels = [1,2,3,4,5]
-x['age'] = pd.cut(x['age'], bins = bins, labels = labels, include_lowest = True)
-
-# 采用adasyn算法进行过采样
-from imblearn.over_sampling import ADASYN
 #from imblearn.over_sampling import SMOTE
 # x_smote, y_smote = SMOTE().fit_sample(x, y)
 x_adasyn, y_adasyn = ADASYN().fit_sample(x, y)
@@ -150,7 +212,6 @@ y_adasyn = pd.DataFrame(y_adasyn)
 y_adasyn.columns = ['rich']
 
 # 查看离散变量之间以及与类标号之间大的皮尔逊相关性
-import seaborn as sns
 a = pd.merge(x_adasyn,y_adasyn,left_index=True, right_index=True)
 a = a.corr() 
 sns.heatmap(a)  
@@ -166,13 +227,6 @@ print(a)
 # x_standardized.columns = ['age', 'workclass', 'education','education_num','marital_status','occupation', 'race','sex','hours_per_week', 'native_country']
 # =============================================================================
 
-# 利用高斯贝叶斯进行分类
-from sklearn import model_selection
-from sklearn.naive_bayes import GaussianNB
-from sklearn import metrics
-from sklearn.metrics import confusion_matrix,accuracy_score,f1_score,roc_curve, auc
-from sklearn.model_selection import KFold
-from sklearn.linear_model import LogisticRegression
 
 # 利用十择法查看分类情况
 def kfold(x, y):
