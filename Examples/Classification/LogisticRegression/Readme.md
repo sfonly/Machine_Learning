@@ -46,30 +46,124 @@
 
 **特征描述:**
 
-
-**类标号分析:**
-
+|      |feature_name| feature_type | structure | describe    |
+| ---- | :----:     | :----:       | :----:    | :----:      |
+| 0 | age           | continues    | int       | 年龄         |
+| 1 | workclass     | discrete     | norminal  | 企业类别     |
+| 2 | fnlwgt        | discrete     | norminal  | 序号，无意义 |
+| 3 | education     | discrete     | norminal  | 最高学历     |
+| 4 | education_num | continues    | int       | 受教育年限   |
+| 5 | marital_status| discrete     | norminal  | 婚姻状况     |
+| 6 | occupation    | discrete     | norminal  | 工作类型     |
+| 7 | relationship  | discrete     | norminal  | 家庭关系     |
+| 8 | race          | discrete     | norminal  | 肤色         |
+| 9 | sex           | discrete     | norminal  | 性别         |
+|10 | capital_gain  | continues    | float     | 投资收入     |
+|11 | capital_loss  | continues    | float     | 投资损失     |
+|12 | hours_per_week| continues    | float     | 每周工作时长  |
+|13 | native_country| discrete     | norminal  | 族裔         |
+|14 | rich          | norminal     | int       | 是否超过50K  |
 
 ### 2.2 案例实验
 
-**数据预处理:**  
+#### 2.2.1 数据预处理
     
-    data.isnull().sum() # 通过分析可以看出，数据集无缺失值
+    去除空值:  
+    print(data.isnull().sum()) # 通过分析可以看出，数据集无缺失值
+    age                  0  
+    workclass         1836  
+    fnlwgt               0  
+    education            0  
+    education_num        0  
+    marital_status       0  
+    occupation        1843  
+    relationship         0  
+    race                 0  
+    sex                  0  
+    capital_gain         0  
+    capital_loss         0  
+    hours_per_week       0  
+    native_country     583  
+    rich                 0  
     
+    workclass 空值有1836个，occupation 有1843个，native_country 有583个,共计2399个空值,缺失样本条数占总数据样本8%左右
+    存在空值的列是: workclass、occupation、native_country, 这三列都是标称类属性，且与其他列的关联性较弱，不好做关联插值
+    这里我们直接将其去除
 
-**数据探索:**  
+    查看类标号分布：
+    print('poor: ' + str(data[data.rich ==0].index.size))
+    print('rich: ' + str(data[data.rich ==1].index.size))
+    poor: 24720
+    rich: 7841
 
+#### 2.2.2 特征工程
 
-**特征工程:**  
+**连续特征:**
 
+    age 和 rich 的关系
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/age.jpg)
+
+    hours_per_week 和 rich 的关系
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/hours_per_week.jpg)
+
+    capital_gain 和 rich 的关系
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/capital_gain.jpg)
+
+    capital_loss 和 rich 的关系
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/capital_loss.jpg)
+
+    education_num 和 rich 的关系
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/education_num.jpg)
+
+**离散特征:**
+
+    workclass 和 rich 的关系
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/workclass.jpg)
+    
+    education 和 rich 的关系
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/education.jpg)
+
+    利用皮尔逊相关系数来看一下 education 编码过后，和education_num之间的关联性
+    由于 education 和 education_num 的相关性极高，存在特征冗余，我们使用 education_num，并将 education 去除
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/edu_cor.jpg)
+
+    marital_status 和 rich 的关系
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/marital_status.jpg)
+
+    occupation 和 rich 的关系
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/occupation.jpg)
+
+    relationship 和 rich 的关系
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/relationship.jpg)
+
+    race 和 rich 的关系
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/race.jpg)
+
+    sex 和 rich 的关系
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/sex.jpg)
+
+    native_country 和 rich 的关系
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/native_country.jpg)
 
     
-**模型训练与评估:**  
+**特征相关性:**
+
+    所有特征和类标号的相关性分析
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/all_cor.jpg)
+
+**过采样:**
+
+
+**数据归一化:**
+
+
+#### 2.2.3 模型训练与评估
 
 
 
-**模型可视化:**  
+#### 2.2.4 结果可视化 
     
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/ROC.jpg)
 
 
 ## 3 总结
