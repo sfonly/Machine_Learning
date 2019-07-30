@@ -46,6 +46,8 @@
 
 **特征描述:**
 
+    这个数据集是来做 UCI 的一个数据集，多次出现在 Kaggle 的竞赛中，我瞎编了背景，让着案例变得更加有趣。
+
 |      |feature_name| feature_type | structure | describe    |
 | ---- | :----:     | :----:       | :----:    | :----:      |
 | 0 | age           | continues    | int       | 年龄         |
@@ -101,6 +103,7 @@
 **连续特征:**
 
     age 和 rich 的关系
+    可以看出rich的人群和poor的人群在年龄阶段上存在比较明细的差异
 ![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/age.jpg)
 
     hours_per_week 和 rich 的关系
@@ -113,14 +116,18 @@
 ![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/capital_loss.jpg)
 
     education_num 和 rich 的关系
+    可以看出，随着受教育年限的增加，富裕人群的比率也随之增加
 ![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/education_num.jpg)
 
 **离散特征:**
 
     workclass 和 rich 的关系
+    根据不同workclass的情况，我这里将without-pay和never-worked归为一类，将state-gov、self-emp-not-inc、Local-gov归为一类
+    然后对几类的特征做哑变量处理
 ![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/workclass.jpg)
     
     education 和 rich 的关系
+    通workclass的处理方式类似，将概率接近的几种学历类型归为一类，然后按照由小到大进行编码，暂不做哑变量处理
 ![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/education.jpg)
 
     利用皮尔逊相关系数来看一下 education 编码过后，和education_num之间的关联性
@@ -128,44 +135,66 @@
 ![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/edu_cor.jpg)
 
     marital_status 和 rich 的关系
+    这里也将marital_status分为了5类，然后做哑变量处理
 ![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/marital_status.jpg)
 
     occupation 和 rich 的关系
+    按照概率进行分箱，然后做哑变量
 ![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/occupation.jpg)
 
     relationship 和 rich 的关系
+    按照概率进行分箱，然后做哑变量
 ![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/relationship.jpg)
 
     race 和 rich 的关系
+    按照概率进行分箱，然后做哑变量，这里将亚裔和白人归位了一类，将印第安裔、黑人归为了一类，others为一类
 ![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/race.jpg)
 
     sex 和 rich 的关系
+    可以看出性别和富裕程度有明细差别，美国职场性别歧视的严重？
 ![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/sex.jpg)
 
     native_country 和 rich 的关系
+    由于 native_country 中的国家裔族太多，然后不同裔族的富裕人群的比率差别比较明显
+    我这里按照每增加5%富裕人群的情况进行分箱，最后分为10类
+    （吐槽一下，印度裔是最高的，超过了45%，看来印度精英真的都移民了）
 ![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/native_country.jpg)
-
     
 **特征相关性:**
 
     所有特征和类标号的相关性分析
+    通过特征矩阵可以很明显的看出，relationship_4 和 marital_status_4 明显正相关，再根据其含义分箱，marital_status_4 中有两个标签组成，其
+    含义是指 已婚配的状态，然后再看 relationship_4 中，其含义是 丈夫和妻子，很明显它门一一对应，因此存在特征冗余，我们选择保留relationship_4
+    去除 marital_status_4
+    # sex、race、workclass出现了较大的负相关性，这是由于做了哑变量后出现了，可以忽视
 ![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/all_cor.jpg)
 
 **过采样:**
+    
+    由于样本中rich的人群只有7841个，而非rich的人群有24720个，存在很明显的差别。因此，这里我用sklearn库里的ADASYN去做过采样
+    
 
+**数据归一化/标准化:**
 
-**数据归一化:**
+    由于连续特征的差异实在是比较大，特别是capital_loss和capital_gain看起来比较像正态分布，这里对样本特征进行特征变换
+    实际上，对age取log之后再做特征变换较好；对教学年限的话，通过归一化缩放到0-1空间较好
 
 
 #### 2.2.3 模型训练与评估
 
-
+    这里使用了逻辑回归对模型进行训练，最后准确率在85%左右，f1值也在86%左右
+    如果使用随机森林、Adaboost等集成算法，应该还能提升一点准确性，但是效果也不是很明显，而且比逻辑回归复杂太多
 
 #### 2.2.4 结果可视化 
     
+    最后，画了一下模型的ROC曲线，可以看到在FP取值0.2的时候，TP就达到0.85左右，在FP取值0.4时，TP达到了0.98以上
+    ROC曲线的面积已经达到了0.93，这个模型已经很不错了
 ![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/ROC.jpg)
-
 
 ## 3 总结
 
-
+    逻辑回归是一个分类算法！
+    实际上很多线性分类器都是在逻辑回归上衍生出来的，学习好逻辑回归的属性模型很重要。
+    
+    在学习逻辑回归中会接触到梯度下降法，这是最优化算法中的一种。
+    参数最优化的问题是一个很大的门类，里面的知识点很多，前期可以先学一点最基础的最优化方法（梯度下降法、最小二乘法、SMO）即可。
