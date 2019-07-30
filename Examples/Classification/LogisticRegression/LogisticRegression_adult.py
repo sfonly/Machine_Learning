@@ -345,7 +345,7 @@ function_classification(x_minmax,y_adasyn)
 
 # 导出训练文件和测试文件
 def output_csv(x,y):
-    x_train, x_test, y_train, y_test = model_selection.train_test_split(x, y,test_size=0.2,random_state=6)
+    x_train, x_test, y_train, y_test = model_selection.train_test_split(x, y,test_size=0.3,random_state=36)
     Traindata = pd.merge(x_train,y_train,left_index=True, right_index=True)
     Traindata.to_csv('C://Users/sf_on/Desktop/adult_train.csv',index = False,encoding = 'utf-8')
     Testdata = pd.merge(x_test,y_test,left_index=True, right_index=True)
