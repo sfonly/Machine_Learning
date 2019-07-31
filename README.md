@@ -1,6 +1,31 @@
 # sfonly的机器学习笔记
-    这是我 sfonly 的学习机器学习笔记，主要是机器学习的算法Python代码实现以及一些数据分析案例，里面的数据集大都
+    这是 sfonly 的学习机器学习笔记，主要是机器学习的算法Python代码实现以及一些数据分析案例，里面的数据集大都
     来源于UCI、Kaggle，理论部分会不断填充。
+    
+## 目录
+  * 线性回归算法
+    * [线性回归算法案例分析](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression)
+  * 感知机算法
+    * [感知机算法代码实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/Perceptron)
+  * KNN算法
+    * [KNN算法代码实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/KNN)
+    * [KNN算法案例分析](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/KNN)
+  * 决策树算法
+    * [CART算法代码实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/KNN)
+    * [决策树算法案例分析](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/DecisionTree)
+  * 逻辑回归算法
+    * [逻辑回归算法案例分析](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/LogisticRegression)
+  * 朴素贝叶斯算法
+    * [朴素贝叶斯算法案例分析](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/NaiveBayes)
+  * 支持向量机算法
+    * [支持向量机算法案例分析](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/SVM)
+  * 随机森林算法
+    * [随机森林算法案例分析](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/RandomForest)
+  * BP神经网络算法
+    * [BP神经网络算法代码实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/BP_NeuralNetwork)
+
+
+
 ## 我的机器学习知识框架
     机器学习是一个边缘学科，属于交叉领域的范畴，和统计学、计算科学、通信工程、控制工程等领域息息相关。需要扎实的
     数学基础，专业的领域知识，以及孜孜不倦的学习。
