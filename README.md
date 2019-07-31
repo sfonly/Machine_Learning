@@ -4,27 +4,29 @@
     
 ## 目录
   * 线性回归算法
-    * [线性回归算法案例分析](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression)
+    * [线性回归算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression)
   * 感知机算法
-    * [感知机算法代码实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/Perceptron)
+    * [感知机算法python实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/Perceptron)
   * KNN算法
-    * [KNN算法代码实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/KNN)
-    * [KNN算法案例分析](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/KNN)
+    * [KNN算法python实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/KNN)
+    * [KNN算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/KNN)
   * 决策树算法
-    * [CART算法代码实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/KNN)
-    * [决策树算法案例分析](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/DecisionTree)
+    * [CART算法python实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/KNN)
+    * [决策树算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/DecisionTree)
   * 逻辑回归算法
-    * [逻辑回归算法案例分析](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/LogisticRegression)
+    * [逻辑回归算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/LogisticRegression)
   * 朴素贝叶斯算法
-    * [朴素贝叶斯算法案例分析](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/NaiveBayes)
+    * [朴素贝叶斯算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/NaiveBayes)
   * 支持向量机算法
-    * [支持向量机算法案例分析](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/SVM)
+    * [支持向量机算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/SVM)
   * 随机森林算法
-    * [随机森林算法案例分析](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/RandomForest)
+    * [随机森林算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/RandomForest)
   * BP神经网络算法
-    * [BP神经网络算法代码实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/BP_NeuralNetwork)
-
-
+    * [BP神经网络算法python实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/BP_NeuralNetwork)
+  * K-Means算法
+    * [K-Means算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Cluster/KMeans)
+  * BIRCH算法
+    * [BIRCH算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Cluster/BIRCH)
 
 ## 我的机器学习知识框架
     机器学习是一个边缘学科，属于交叉领域的范畴，和统计学、计算科学、通信工程、控制工程等领域息息相关。需要扎实的
