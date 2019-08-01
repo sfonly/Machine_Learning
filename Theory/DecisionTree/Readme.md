@@ -3,7 +3,7 @@
     * [如何建立决策树](https://github.com/sfonly/Machine_Learning/tree/master/Theory/DecisionTree#如何建立决策树)
     * [信息熵](https://github.com/sfonly/Machine_Learning/tree/master/Theory/DecisionTree#信息熵)
       * [什么是信息熵](https://github.com/sfonly/Machine_Learning/tree/master/Theory/DecisionTree#什么是信息熵)
-        * [信息论之父——香农](https://github.com/sfonly/Machine_Learning/tree/master/Theory/DecisionTreer#信息论之父香农)
+        * [信息论之父——香农](https://github.com/sfonly/Machine_Learning/tree/master/Theory/DecisionTree#信息论之父香农)
         * [信息量的定义_我的理解](https://github.com/sfonly/Machine_Learning/tree/master/Theory/DecisionTree#信息量的定义_我的理解)
         * [信息熵公式推导](https://github.com/sfonly/Machine_Learning/tree/master/Theory/DecisionTree#信息熵公式推导)
       * [信息熵和信息增益有什么用](https://github.com/sfonly/Machine_Learning/tree/master/Theory/DecisionTree#信息熵和信息增益有什么用)
