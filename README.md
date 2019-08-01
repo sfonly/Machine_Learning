@@ -10,7 +10,7 @@
   * KNN算法
     * [KNN算法python实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/KNN)
     * [KNN算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/KNN)
-  * 决策树算法
+  * [决策树算法](https://github.com/sfonly/Machine_Learning/tree/master/Theory/DecisionTree)
     * [CART算法python实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/KNN)
     * [决策树算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/DecisionTree)
   * 逻辑回归算法
@@ -30,8 +30,8 @@
 
 ## 我的机器学习知识框架
     机器学习是一个边缘学科，属于交叉领域的范畴，和统计学、计算科学、通信工程、控制工程等领域息息相关。需要扎实的
-    数学基础，专业的领域知识，以及孜孜不倦的学习。
-    以下是我的知识结构，还请多多见谅。
+    数学基础，专业的领域知识，以及孜孜不倦的学习。(我还需要多多努力啊）
+    以下是我的知识结构，还请多多见谅，欢迎各位大佬斧正。
   * 数学知识
     * 高等数学
     * 线性代数
@@ -54,13 +54,5 @@
     * 信息论
     * 控制论（会应用到机器人、无人驾驶等领域）
     * 信号处理（会应用到CV、NLP等领域）
-## 本项目内容
-  * 算法    
-        * 常用算法：Perceptron、CART、BP、KNN
-    > 自行实现部分常用机器学习算法，完善中
-  * 案例分析
-    * 回归（LineRegression）
-    * 分类（KNN、LR、RF、NB、SVM）
-    * 聚类（Kmeans、Birch）
-    > 采用某种算法，对样例数据进行分析，完善中
+
      
