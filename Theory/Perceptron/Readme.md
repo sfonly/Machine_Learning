@@ -1,11 +1,11 @@
-  * [感知机算法](https://github.com/sfonly/Machine_Learning/new/master/Theory/Perceptron/Readme.md/#感知机算法)
-    * [感知机的原理](https://github.com/sfonly/Machine_Learning/new/master/Theory/Perceptron/Readme.md/#感知机的原理)
-    * [距离度量](https://github.com/sfonly/Machine_Learning/new/master/Theory/Perceptron/Readme.md/#距离度量)
-      * [点到线的距离](https://github.com/sfonly/Machine_Learning/new/master/Theory/Perceptron/Readme.md/#点到线的距离)
-      * [点到面的距离](https://github.com/sfonly/Machine_Learning/new/master/Theory/Perceptron/Readme.md/#点到面的距离)
-    * [感知机模型](https://github.com/sfonly/Machine_Learning/new/master/Theory/Perceptron/Readme.md/#感知机模型)
-    * [感知机学习算法](https://github.com/sfonly/Machine_Learning/new/master/Theory/Perceptron/Readme.md/#感知机学习算法)
-    * [总结](https://github.com/sfonly/Machine_Learning/new/master/Theory/Perceptron/Readme.md/#总结)
+  * [感知机算法](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#感知机算法)
+    * [感知机的原理](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#感知机的原理)
+    * [距离度量](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#距离度量)
+      * [点到线的距离](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron/#点到线的距离)
+      * [点到面的距离](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#点到面的距离)
+    * [感知机模型](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#感知机模型)
+    * [感知机学习算法](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#感知机学习算法)
+    * [总结](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#总结)
     
 # 感知机算法       
     感知机是由 Rosenblatt 在1957年提出的一种方法，是神经网络和支持向量机的基础。
