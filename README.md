@@ -5,7 +5,7 @@
 ## 目录
   * 线性回归算法
     * [线性回归算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression)
-  * 感知机算法
+  * [感知机算法](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron)
     * [感知机算法python实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/Perceptron)
   * KNN算法
     * [KNN算法python实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/KNN)
