@@ -94,6 +94,11 @@
 
 <img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/损失函数.png" width = 30% height = 30% />
 
+**需要特别注意的是：** 
+
+    M 是当前分类器情况下，被错分的样本域
+    因此，只有被错分的样本才会进行参数优化
+    而被正确分类的样本对模型优化无影响
 
 ## 4 感知机参数学习方法
   
@@ -101,13 +106,22 @@
 
 **目标函数如下：** 
 
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/损失函数.png" width = 30% height = 30% />
+<img src="https://latex.codecogs.com/gif.latex?\min&space;L(w,b)&space;=&space;\min(-&space;\sum_{x&space;\epsilon&space;M}&space;y_{i}(w\cdot&space;x_{i}&space;&plus;&space;b))" title="\min L(w,b) = \min(- \sum_{x \epsilon M} y_{i}(w\cdot x_{i} + b))" />
 
     在实际应用中，一般不会采用批量梯度下降算法，因为批量梯度下降算法需要每次带入所有的样本
     而在感知机中，被正确分类的样本不会对参数有影响，只有错分样本才能参与模型优化
     因此，我们通常会采用随机梯度下降，每次随机选择一个样本点进行参数优化，这样可以极大的提升算法运行效率
 
 ### 4.1 原始形式
+
+**采用梯度下降法优化参数 w 和 b，分别对目标函数求偏导令其等于 0，可得：**
+
+<img src="https://latex.codecogs.com/gif.latex?w&space;=&space;w&space;&plus;&space;\eta&space;y_{i}&space;x_{i}" title="w = w + \eta y_{i} x_{i}" />  
+
+<img src="https://latex.codecogs.com/gif.latex?b&space;=&space;b&space;&plus;&space;\eta&space;y_{i}" title="b = b + \eta y_{i}" />
+
+**在上述情况下，参数最优化，损失函数最小，训练误差最小**
+
 **伪代码如下:**
 
 ```python
