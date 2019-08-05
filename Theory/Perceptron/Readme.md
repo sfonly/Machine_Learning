@@ -1,31 +1,54 @@
   * [感知机算法](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#感知机算法)
-    * [感知机的原理](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#感知机的原理)
-    * [距离度量](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#距离度量)
-      * [点到线的距离](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#点到线的距离)
-      * [点到面的距离](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#点到面的距离)
-    * [感知机模型](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#感知机模型)
-      * [感知机的数学表达](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#感知机的数学表达)
-      * [感知机的损失函数](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#感知机的损失函数)
-    * [感知机参数学习方法](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#感知机参数学习方法)
-      * [原始形式](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#原始形式)
-      * [对偶形式](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#对偶形式)
-    * [总结](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#总结)
-    
+    * [感知机的原理](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#1感知机的原理)
+      * [模拟神经元](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#11模拟神经元)
+      * [感知机的判别机理](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#12感知机的判别机理)
+    * [距离度量](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#2距离度量)
+      * [点到线的距离](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#21点到线的距离)
+      * [点到面的距离](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#22点到面的距离)
+    * [感知机模型](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#3感知机模型)
+      * [感知机的数学表达](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#31感知机的数学表达)
+      * [感知机的损失函数](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#32感知机的损失函数)
+    * [感知机参数学习方法](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#4感知机参数学习方法)
+      * [原始形式](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#41原始形式)
+      * [对偶形式](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#42对偶形式)
+    * [感知机算法代码实现](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#5感知机算法代码实现)
+    * [总结](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#6总结)
+
     
 # 感知机算法       
     感知机是由 Rosenblatt 在1957年提出的一种方法，是神经网络和支持向量机的基础。
-## 感知机的原理
+
+## 1 感知机的原理
+
 [维基百科-感知机](https://zh.wikipedia.org/zh-hans/感知器)  
 
+### 1.1 模拟神经元
+
+  **我们知道，感知机其实就是模拟一个单独的神经元的工作方式，得出一个是还是否的判断。**
+  
+  <img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/感知机模型.png" width = 30% height = 30% />
+  
+    输入:  X = (1, a1, a2, a3, ... , an).T 
+          W = (w0, w1, w2, w3, ... , wn)
+          
+  **当我们把输入转化为向量时，就可以用向量和权重的内积计算出一个数值，再利用sigmoid函数的性质，将其转化为布尔类型的判断，这就是感知机**
+
+### 1.2 感知机的判别机理
+
+  **我们将样本的特征向量在空间中表示出来，如下图二维的特征所示：**
+  
 <img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/点线面.png" width = 50% height = 50% />
+
+  **在上图的问题中，感知机就是那一条线，我们要找的就说能够将问题分开的这这条‘线’**
 
     感知机是一种线性模型，一般用于二分类，其输入是实例的特征向量，输出的是事例的类别label，分别是 +1 和 -1，属于判别模型的一种。  
     通常而言，我们认为可以通过一条线将二维空间中的点（数据）分为两边，即两个类别
     如果上升到三维、甚至更高维的空间中，能够将其分开的面，即为 “超平面”
-    如果是非线性可分的模型，则可能没有超平面
+    注意：如果是非线性可分的模型，则可能没有超平面！
 
-## 距离度量
-  **如何寻找这个超平面呢？**  
+## 2 距离度量
+  
+  **那么，如何寻找这个超平面呢？**  
   **大师们的想法是：**  
   
     在空间中，分别计算+1和-1的点到超平面的距离。  
@@ -36,53 +59,52 @@
     
   **这样，就把一个人类理想的模式识别的问题，转化为了几何数学的问题。**   
   **从一个人类直觉的模型，转化为了数学公式，多么天才的想法！**  
-### 点到线的距离
+  
+### 2.1 点到线的距离
+
 公式中的直线方程为 Ax+By+C=0，P点的坐标为(x0,y0)
 
 <img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/点到直线距离公式.png" width = 20% height = 20% />
-
     
-### 点到面的距离
+### 2.2 点到面的距离
 假设超平面是 h=w⋅x+b，其中 w=(w0,w1,...wm), x=(x0,x1,...xm)，样本点 x′ 到超平面的距离如下：
 
 <img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/点到平面.png" width = 20% height = 20% />
 
-
-## 感知机模型
-### 感知机的数学表达
+## 3 感知机模型
+### 3.1 感知机的数学表达
 
 <img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/点到超平面.png" width = 40% height = 40% />
 
 <img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/感知机定义公式.png" width = 30% height = 30% />
 
+### 3.2感知机的损失函数
 
-### 感知机的损失函数
-
-  在感知机中，我们定义：
-  1. 对于任意一个样本点（xi,yi）,我们可以通过其距离公式计算器误差
-  2. 如果 w*xi+b>0, 则记 yi = +1
-  3. 如果 w*xi+b<0, 则记 yi = -1
-  4. 所以，我们只需要保证 yi*(w*xi+b)>0 ,则是样本被正确分类
-  5. 而被错误分类的情况是： yi*(w*xi+b)<0
+在感知机中，我们定义：  
+    
+    1. 对于任意一个样本点（xi,yi）,我们可以通过其距离公式计算器误差
+    2. 如果 w*xi+b>0, 则记 yi = +1
+    3. 如果 w*xi+b<0, 则记 yi = -1
+    4. 所以，我们只需要保证 yi*(w*xi+b)>0 ,则是样本被正确分类
+    5. 而被错误分类的情况是： yi*(w*xi+b)<0
 
 **因此，在感知机中，我们可以定义损失函数为：** 
 
 <img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/损失函数.png" width = 30% height = 30% />
 
 
-## 感知机参数学习方法
+## 4 感知机参数学习方法
   感知机学习的过程，既是参数 W 和 b 优化的过程，通过将损失函数极小化，得到最优的参数，从而的出感知机的参数模型。
 
 **目标函数如下：** 
 
 <img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/损失函数.png" width = 30% height = 30% />
 
+    在实际应用中，一般不会采用批量梯度下降算法，因为批量梯度下降算法需要每次带入所有的样本
+    而在感知机中，被正确分类的样本不会对参数有影响，只有错分样本才能参与模型优化
+    因此，我们通常会采用随机梯度下降，每次随机选择一个样本点进行参数优化，这样可以极大的提升算法运行效率
 
-  在实际应用中，一般不会采用批量梯度下降算法，因为批量梯度下降算法需要每次带入所有的样本
-  而在感知机中，被正确分类的样本不会对参数有影响，只有错分样本才能参与模型优化
-  因此，我们通常会采用随机梯度下降，每次随机选择一个样本点进行参数优化，这样可以极大的提升算法运行效率
-
-### 原始形式
+### 4.1 原始形式
 **伪代码如下:**
 
 ```python
@@ -102,52 +124,70 @@ class Train:
      否则，回到 2 继续循环
 ```
 
-### 对偶形式
+### 4.2 对偶形式
 
 原始-对偶问题，是基于凸优化的思想，最小二乘、线性规划等都是凸优化问题  
 [维基百科-凸优化](https://zh.wikipedia.org/wiki/凸優化)
 
-关于对偶，可以简单理解为，将原始问题在某个可行域上，转化为一个等价的对偶问题，从而更加方便的得出答案
+    关于对偶，可以简单理解为，将原始问题在某个可行域上，转化为一个等价的对偶问题，从而更加方便的得出答案
 
-根据 w 和 b 的梯度更新公式有：
+**根据 w 和 b 的梯度更新公式有：**
 
 <img src="https://latex.codecogs.com/gif.latex?w&space;=&space;w&space;&plus;&space;\eta&space;y_{i}&space;x_{i}" title="w = w + \eta y_{i} x_{i}" />  
 
 <img src="https://latex.codecogs.com/gif.latex?b&space;=&space;b&space;&plus;&space;\eta&space;y_{i}" title="b = b + \eta y_{i}" />
 
-在 n 次迭代后，被错分的点(xi, yi)属于M数据集，那么 w 和 b 的梯度下降公式应该为：
+**在 n 次迭代后，被错分的点(xi, yi)属于M数据集，那么 w 和 b 的梯度下降公式应该为：**
 
 <img src="https://latex.codecogs.com/gif.latex?w&space;=&space;w&space;&plus;&space;\sum_{{x_{i}}&space;\in&space;M}&space;{}&space;\eta&space;{x_{i}}&space;{y_{i}}" title="w = w + \sum_{{x_{i}} \in M} {} \eta {x_{i}} {y_{i}}" />
 
 <img src="https://latex.codecogs.com/gif.latex?b&space;=&space;b&space;&plus;&space;\sum_{{x_{i}}&space;\in&space;M}&space;{}&space;\eta&space;{y_{i}}" title="b = b + \sum_{{x_{i}} \in M} {} \eta {y_{i}}" />
 
-如果初始设置的 w 和 b 为 0，那么在 n 次迭代后，那么我们可以将 w 和 b 的梯度下降公式进行如下变换，整理成其对偶形式：
+**如果初始设置的 w 和 b 为 0，总的迭代次数是 n 次，那么，我们可以将 w 和 b 的梯度下降公式进行如下变换，整理成其对偶形式：**
 
+<img src="https://latex.codecogs.com/gif.latex?w&space;=&space;w&space;&plus;&space;\sum_{{x_{i}}&space;\in&space;M}&space;{}&space;\eta&space;y_{i}&space;x_{i}&space;=&space;\sum_{i=1}^{n}&space;[(n_{i}\eta&space;)y_{i}&space;x_{i}]" title="w = w + \sum_{{x_{i}} \in M} {} \eta y_{i} x_{i} = \sum_{i=1}^{n} [(n_{i}\eta )y_{i} x_{i}]" />
 
+<img src="https://latex.codecogs.com/gif.latex?b&space;=&space;b&space;&plus;&space;\sum_{{x_{i}}&space;\in&space;M}&space;{}&space;\eta&space;y_{i}&space;=&space;\sum_{i=1}^{n}&space;[(n_{i}\eta&space;)y_{i}]" title="b = b + \sum_{{x_{i}} \in M} {} \eta y_{i} = \sum_{i=1}^{n} [(n_{i}\eta )y_{i}]" />
 
+**我们注意到： ni 实际上是参数当前修改的迭代次数，那么我们令：**
 
+<img src="https://latex.codecogs.com/gif.latex?\alpha&space;=&space;n_{i}&space;y_{i}" title="\alpha = n_{i} y_{i}" />
 
-未完待续：
+**那么，就可以将梯度下降公式转化为：**
+
+<img src="https://latex.codecogs.com/gif.latex?w&space;=&space;\sum_{i=1}^{n}&space;[(n_{i}\eta&space;)y_{i}&space;x_{i}]&space;=&space;\sum_{i=1}^{n}&space;\alpha_{i}&space;y_{i}&space;x_{i}" title="w = \sum_{i=1}^{n} [(n_{i}\eta )y_{i} x_{i}] = \sum_{i=1}^{n} \alpha_{i} y_{i} x_{i}" />
+
+<img src="https://latex.codecogs.com/gif.latex?b&space;=&space;\sum_{i=1}^{n}&space;(n_{i}\eta&space;)y_{i}&space;=&space;\sum_{i=1}^{n}&space;\alpha_{i}&space;y_{i}" title="b = \sum_{i=1}^{n} (n_{i}\eta )y_{i} = \sum_{i=1}^{n} \alpha_{i} y_{i}" />
+
+**这样，我们就得出了感知机的对偶算法**
+
+**感知机对偶算法的伪代码如下：**
 
 ```python
 input:  TrainingData: {(x0,y0),(x1,y1), ...,(xn,yn)} # xi为特征向量， y= +1 or -1
         learning_step:  0<lr<1  # 学习速率
         max_iter:  n # 最大迭代次数
-output：w,b
-        f(x)=sign(wx+b)
+output：α,b
+        w= sum(αj*yj*xj)*x ; b = sum(αj*y) ;
+        f(x) = sign(w*x + b) = sign(sum(αj*yj*xj)*x + b)
+        # 其中α=(α1,α2,...,αn)T
 class Train:
-  1. 赋初始值 w0, b0
+  1. 赋初始值 α0, b0
   2. 选择迭代的样本点 (xi, yi)
-  3. if yi*(w*xi+b)<0:
-       更新 w, b:
-          w = w + a*yi*xi
-          b = b + a*yi
+  3. if yi*(sum(αj*yj*xj)*xi + b)<0:
+       更新 α, b:
+          αi = αi + lr
+          b = b + lr*yi
+       # 注意j是更新迭代的次数，i是指样本中第i个点
   4. 如果，已经达到最大迭代次数，或者样本中点都被分对，则停止
      否则，回到 2 继续循环
 ```
 
+## 5 感知机算法代码实现
 
-## 总结
+[感知机算法python实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/Perceptron)
+
+## 6 总结
 
 
 
