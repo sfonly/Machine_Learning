@@ -1,22 +1,24 @@
   * [感知机算法](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#感知机算法)
-    * [感知机的原理](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#1感知机的原理)
-      * [模拟神经元](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#11模拟神经元)
-      * [感知机的判别机理](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#12感知机的判别机理)
-    * [距离度量](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#2距离度量)
-      * [点到线的距离](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#21点到线的距离)
-      * [点到面的距离](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#22点到面的距离)
-    * [感知机模型](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#3感知机模型)
-      * [感知机的数学表达](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#31感知机的数学表达)
-      * [感知机的损失函数](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#32感知机的损失函数)
-    * [感知机参数学习方法](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#4感知机参数学习方法)
-      * [原始形式](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#41原始形式)
-      * [对偶形式](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#42对偶形式)
-    * [感知机算法代码实现](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#5感知机算法代码实现)
-    * [总结](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#6总结)
+    * [感知机的原理](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#1-感知机的原理)
+      * [模拟神经元](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#11-模拟神经元)
+      * [感知机的判别机理](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#12-感知机的判别机理)
+    * [距离度量](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#2-距离度量)
+      * [点到线的距离](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#21-点到线的距离)
+      * [点到面的距离](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#22-点到面的距离)
+    * [感知机模型](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#3-感知机模型)
+      * [感知机的数学表达](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#31-感知机的数学表达)
+      * [感知机的损失函数](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#32-感知机的损失函数)
+    * [感知机参数学习方法](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#4-感知机参数学习方法)
+      * [原始形式](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#41-原始形式)
+      * [对偶形式](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#42-对偶形式)
+      * [两种方法的选择](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#43-两种方法的选择)
+    * [感知机算法代码实现](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#5-感知机算法代码实现)
+    * [总结](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron#6-总结)
 
     
 # 感知机算法       
-    感知机是由 Rosenblatt 在1957年提出的一种方法，是神经网络和支持向量机的基础。
+
+  **感知机是由 Rosenblatt 在1957年提出的一种方法，是神经网络和支持向量机的基础。**
 
 ## 1 感知机的原理
 
@@ -28,7 +30,7 @@
   
   <img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/感知机模型.png" width = 30% height = 30% />
   
-    输入:  X = (1, a1, a2, a3, ... , an).T 
+    输入:  X = (1, a1, a2, a3, ... , an) 
           W = (w0, w1, w2, w3, ... , wn)
           
   **当我们把输入转化为向量时，就可以用向量和权重的内积计算出一个数值，再利用sigmoid函数的性质，将其转化为布尔类型的判断，这就是感知机**
@@ -78,7 +80,7 @@
 
 <img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/感知机定义公式.png" width = 30% height = 30% />
 
-### 3.2感知机的损失函数
+### 3.2 感知机的损失函数
 
 在感知机中，我们定义：  
     
@@ -94,7 +96,8 @@
 
 
 ## 4 感知机参数学习方法
-  感知机学习的过程，既是参数 W 和 b 优化的过程，通过将损失函数极小化，得到最优的参数，从而的出感知机的参数模型。
+  
+  **感知机学习的过程，既是参数 W 和 b 优化的过程，通过将损失函数极小化，得到最优的参数，从而的出感知机的参数模型。**
 
 **目标函数如下：** 
 
@@ -151,7 +154,7 @@ class Train:
 
 **我们注意到： ni 实际上是参数当前修改的迭代次数，那么我们令：**
 
-<img src="https://latex.codecogs.com/gif.latex?\alpha&space;=&space;n_{i}&space;y_{i}" title="\alpha = n_{i} y_{i}" />
+<img src="https://latex.codecogs.com/gif.latex?\alpha&space;=&space;n_{i}&space;\eta" title="\alpha = n_{i} \eta" />
 
 **那么，就可以将梯度下降公式转化为：**
 
@@ -183,25 +186,59 @@ class Train:
      否则，回到 2 继续循环
 ```
 
+**注意代码，实际上样本训练集的特征，只在判断条件中使用到，其余都没有使用到！**  
+**我们将判断条件提取出来：**
+
+<img src="https://latex.codecogs.com/gif.latex?y_{i}((\sum_{j=1}^{n}\alpha&space;_{j}&space;y_{j}&space;x_{j})\cdot&space;x_{i}&space;&plus;&space;b)&space;\leq&space;0&space;\Leftrightarrow&space;y_{i}(\sum_{j=1}^{n}\alpha&space;_{j}&space;y_{j}(x_{j}\cdot&space;x_{i})&space;&plus;&space;b)&space;\leq&space;0" title="y_{i}((\sum_{j=1}^{n}\alpha _{j} y_{j} x_{j})\cdot x_{i} + b) \leq 0 \Leftrightarrow y_{i}(\sum_{j=1}^{n}\alpha _{j} y_{j}(x_{j}\cdot x_{i}) + b) \leq 0" />
+
+**我们每次做运算的时候，只需要先计算好所有的 xj 和 xi 的内积，形成一个矩阵，就是 Gram 矩阵**  
+**当我们再次使用进行判断时，只需要根据对应的 i 和 j 查询即可**  
+
+<img src="https://latex.codecogs.com/gif.latex?Gram&space;=&space;[x_{i}&space;\cdot&space;x_{j}]_{N\times&space;N}" title="Gram = [x_{i} \cdot x_{j}]_{N\times N}" />
+
+### 4.3 两种方法的选择
+
+    那么，我们什么时候用原始形式，什么时候利用对偶形式呢?
+    可以注意到，区别就在于判断条件！
+
+**原始形式：**
+
+<img src="https://latex.codecogs.com/gif.latex?y_{i}(w^{T}&space;\cdot&space;x_{i}&space;&plus;&space;b)&space;\leq&space;0" title="y_{i}(w^{T} \cdot x_{i} + b) \leq 0" />
+
+**对偶形式：**
+
+<img src="https://latex.codecogs.com/gif.latex?y_{i}(\sum_{j=1}^{n}\alpha&space;_{j}&space;y_{j}(x_{j}\cdot&space;x_{i})&space;&plus;&space;b)&space;\leq&space;0" title="y_{i}(\sum_{j=1}^{n}\alpha _{j} y_{j}(x_{j}\cdot x_{i}) + b) \leq 0" />
+
+**时间复杂度：**  
+    
+    原始形式：
+        需要计算权重 w 和样本 x 的内积，时间复杂度为：O(n)，n 为特征向量数量
+    对偶形式：
+        可以提前计算 Gram 矩阵，计算 Gram 矩阵的时间复杂度为：O(N), N为样本数量
+        而在训练模型的时候，则只需要查询即可，时间复杂度为 O(1)
+
+**结论：**
+
+    1. 如果特征向量n过大，那么计算 (w,x) 的内积的时间会过长。这时候采用对偶形式 
+    2. 如果样本数量N巨大，那么计算 Gram 矩阵时间很长，所占据的内存空间也极大，这时候就应该采用原始形式。
+
+**对偶形式的感知机算法，把每轮迭代的时间复杂度从特征空间维度 n 转移到了样本数据数量 N 上，这真的是一件很奇妙的做法。**
+
 ## 5 感知机算法代码实现
 
+    我自己用python实现了一遍感知机算法，仅供参考：
+    
 [感知机算法python实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/Perceptron)
 
 ## 6 总结
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    花了很长的心思来写感知机的理论学习笔记。
+    感知机虽然简单，但是大名鼎鼎的 SVM 和 神经网络 都是从它身上衍伸出来的
+    重点不在于算法本身的应用，而是它背后的数学思想，值得好好的学习。
+    
+引用：    
+李航老师 《统计学习方法》  
+[刘建平-感知机原理小结](https://www.cnblogs.com/pinard/p/6042320.html)  
 
 
 
