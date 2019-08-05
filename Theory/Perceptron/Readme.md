@@ -60,10 +60,10 @@
 
   在感知机中，我们定义：
   1. 对于任意一个样本点（xi,yi）,我们可以通过其距离公式计算器误差
-  2. 如果 W*xi+b>0, 则记 yi = +1
-  3. 如果 W*xi+b<0, 则记 yi = -1
-  4. 所以，我们只需要保证 yi*(W*xi+b)>0 ,则是样本被正确分类
-  5. 而被错误分类的情况是： yi*(W*xi+b)<0
+  2. 如果 w*xi+b>0, 则记 yi = +1
+  3. 如果 w*xi+b<0, 则记 yi = -1
+  4. 所以，我们只需要保证 yi*(w*xi+b)>0 ,则是样本被正确分类
+  5. 而被错误分类的情况是： yi*(w*xi+b)<0
 
 **因此，在感知机中，我们可以定义损失函数为：** 
 
@@ -98,13 +98,34 @@ class Train:
        更新 w, b:
           w = w + lr*yi*xi
           b = b + lr*yi
-  4. 如果，达到迭代次数，或者样本中点都被分对，停止
+  4. 如果，已经达到最大迭代次数，或者样本中点都被分对，则停止
      否则，回到 2 继续循环
 ```
 
 ### 对偶形式
 
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/对偶算法.png" width = 60% height = 60% />
+原始-对偶问题，是基于凸优化的思想，最小二乘、线性规划等都是凸优化问题  
+[维基百科-凸优化](https://zh.wikipedia.org/wiki/凸優化)
+
+关于对偶，可以简单理解为，将原始问题在某个可行域上，转化为一个等价的对偶问题，从而更加方便的得出答案
+
+根据 w 和 b 的梯度更新公式有：
+
+<img src="https://latex.codecogs.com/gif.latex?w&space;=&space;w&space;&plus;&space;\eta&space;y_{i}&space;x_{i}" title="w = w + \eta y_{i} x_{i}" />  
+
+<img src="https://latex.codecogs.com/gif.latex?b&space;=&space;b&space;&plus;&space;\eta&space;y_{i}" title="b = b + \eta y_{i}" />
+
+在 n 次迭代后，被错分的点(xi, yi)属于M数据集，那么 w 和 b 的梯度下降公式应该为：
+
+<img src="https://latex.codecogs.com/gif.latex?w&space;=&space;w&space;&plus;&space;\sum_{{x_{i}}&space;\in&space;M}&space;{}&space;\eta&space;{x_{i}}&space;{y_{i}}" title="w = w + \sum_{{x_{i}} \in M} {} \eta {x_{i}} {y_{i}}" />
+
+<img src="https://latex.codecogs.com/gif.latex?b&space;=&space;b&space;&plus;&space;\sum_{{x_{i}}&space;\in&space;M}&space;{}&space;\eta&space;{y_{i}}" title="b = b + \sum_{{x_{i}} \in M} {} \eta {y_{i}}" />
+
+如果初始设置的 w 和 b 为 0，那么在 n 次迭代后，那么我们可以将 w 和 b 的梯度下降公式进行如下变换，整理成其对偶形式：
+
+
+
+
 
 未完待续：
 
@@ -121,7 +142,7 @@ class Train:
        更新 w, b:
           w = w + a*yi*xi
           b = b + a*yi
-  4. 如果，达到迭代次数，或者样本中点都被分对，停止
+  4. 如果，已经达到最大迭代次数，或者样本中点都被分对，则停止
      否则，回到 2 继续循环
 ```
 
