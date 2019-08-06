@@ -22,7 +22,7 @@
   * 随机森林算法
     * [随机森林算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/RandomForest)
   * BP神经网络算法
-    * [BP神经网络算法python实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/BP_NeuralNetwork)
+    * [BP神经网络算法python实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/BP_NeuralNetwork)
   * K-Means算法
     * [K-Means算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Cluster/KMeans)
   * BIRCH算法
