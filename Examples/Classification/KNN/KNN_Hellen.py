@@ -2,24 +2,45 @@
 """
 Created on Fri Jul 12 16:33:09 2019
 
+KNN Algorithm
+
 @author: sf_on
 """
 
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from collections import Counter
 from sklearn import model_selection
 
-# 获取两个向量的距离
+
 def get_distance(vec1, vec2):
+    '''
+    获取两个向量的欧式距离
+    Paramters：
+        vec1:       向量 1
+        vec2:       向量 2
+    Return：
+        distance：  两个向量的欧式距离
+    '''
     # list转array
     npvec1 = np.array(vec1)
     npvec2 = np.array(vec2)
     distance = ((npvec1 - npvec2)**2).sum()
     return distance
 
-# 获取一个测试向量在训练集上 k 近邻的label    
+
 def get_label(train_feature, test_vec, train_labels, k=1):
+    '''
+    获取一个测试向量在训练集上 k 近邻的 label
+    Paramters：
+        train_feature： 训练数据集特征矩阵
+        test_vec:       测试向量
+        train_labels:   训练集的类别
+        k：             选择多少个近邻
+    Return：
+        str(label)：    预测这个测试向量的类别
+    '''
     all_distance_label = []
     # 计算测试向量到所有训练向量的距离
     for i in range(len(train_feature)):
@@ -41,8 +62,18 @@ def get_label(train_feature, test_vec, train_labels, k=1):
     label = Counter(top_k).most_common(1)[0][0]
     return str(label)
 
-# 预测训练集的label
+
 def predict(train_feature, test_feature, train_labels, k):
+    '''
+    预测测试集（所有测试向量）的label
+    Paramters：
+        train_feature： 训练数据集特征矩阵
+        test_feature:   测试数据集特征矩阵
+        train_labels:   训练集的类别
+        k：             选择多少个近邻
+    Return：
+        all_pre_label： 测试集预测的所有类别
+    '''
     all_pre_label = []
     for i in range(len(test_feature)):
         test_vec = test_feature[i]
@@ -50,8 +81,20 @@ def predict(train_feature, test_feature, train_labels, k):
         all_pre_label.append(pre_label)
     return all_pre_label
 
-# 对于训练集预测的label进行统计
+
 def classify(train_feature, test_feature, train_labels, test_labels, k):
+    '''
+    对于训练集预测的label进行统计
+    Paramters：
+        train_feature：    训练数据集特征矩阵
+        test_feature:      测试数据集特征矩阵
+        train_labels:      训练集的类别
+        test_labels：      测试集的类别
+        k：                选择多少个近邻
+    Return：
+        true_probability： 测试集的准确率
+        all_pre_label：    测试集预测的所有类别
+    '''
     error_counter = 0
     pre_labels = predict(train_feature, test_feature, train_labels, k)
     for i in range(len(test_labels)):
@@ -63,9 +106,11 @@ def classify(train_feature, test_feature, train_labels, test_labels, k):
     true_probability = 1 - error_counter/len(test_feature)
     return true_probability,pre_labels
 
-# 测试用例
+
 def test():
-    # 创建训练集
+    '''
+    测试用例
+    '''
     train_feature = np.array([[1.0,1.1],[1.0,1.0],[0,0],[0,0.1]])
     train_labels = ['A','A','B','B']
     test_feature = np.array([[0.9,1.2],[1.1,0.7],[-0.1,0.1],[0.3,0]])
@@ -74,27 +119,65 @@ def test():
     tp,pre_labels = classify(train_feature, test_feature, train_labels, test_labels, k)
     print(tp)
 
-# 数据归一化
+
 def autoNorm(dataSet):
-    #获得数据的最小值
+    '''
+    数据归一化
+    Paramters：
+        dataSet:        数据集
+    Return：
+        normDataSet：   归一化数据结果
+        ranges：        最大值和最小值的范围
+        minVals：       最小值
+    '''
     minVals = dataSet.min(0)
     maxVals = dataSet.max(0)
-    #最大值和最小值的范围
     ranges = maxVals - minVals
-    #shape(dataSet)返回dataSet的矩阵行列数
-    normDataSet = np.zeros(np.shape(dataSet))
-    #返回dataSet的行数
     m = dataSet.shape[0]
-    #原始值减去最小值
+    
+    normDataSet = np.zeros(np.shape(dataSet))
     normDataSet = dataSet - np.tile(minVals, (m, 1))
-    #除以最大和最小值的差,得到归一化数据
     normDataSet = normDataSet / np.tile(ranges, (m, 1))
-    #返回归一化数据结果,数据范围,最小值
+    
     return normDataSet, ranges, minVals
+
+
+def show_features_scatter(features, label, col1_num, col2_num):
+    '''
+    绘制两个特征的散点图和类别
+    Paramters：
+        features:   特征矩阵
+        label:      类别的序列
+        col1_num:   作为横坐标的特征
+        col2_num:   作为纵坐标的特征
+    '''
+    col1_name = data.columns.tolist()[col1_num]
+    col2_name = data.columns.tolist()[col2_num]
+    
+    ind1 = np.where(np.array(label)=='largeDoses')
+    ind2 = np.where(np.array(label)=='smallDoses')
+    ind3 = np.where(np.array(label)=='didntLike')
+
+    fig = plt.figure(figsize=(9,6))
+    ax = fig.add_subplot(111)
+    plt.xlabel(col1_name)
+    plt.ylabel(col2_name)
+    plt.title(col1_name + ' VS '+ col2_name)
+    
+    ax.scatter(features[ind1,col1_num], features[ind1,col2_num], c="red",label="largeDoses" ,s=20)
+    ax.scatter(features[ind2,col1_num], features[ind2,col2_num], c="blue",label="smallDoses",s=20)
+    ax.scatter(features[ind3,col1_num], features[ind3,col2_num], c="green",label="didntLike",s=20)
+    ax.legend(loc='best')
+    
+    plt.show()
+
 
 if __name__ == '__main__':
     # 读入数据
-    ORGdata = pd.read_csv(open(./Hellen.csv', encoding='UTF-8'),encoding='UTF-8',header = None)
+    columns = ['flight_mileage','games_time_percent','eat_icecream_liters','label']
+    ORGdata = pd.read_csv(open('C://Users/sf_on/Desktop/数据挖掘应用分析实验手册/K最近邻分类/Hellen.csv',
+                     encoding='UTF-8'),encoding='UTF-8',header = None, names = columns)
+
     # 数据归一化
     data, ranges, minVals =  autoNorm(ORGdata.iloc[:,:3])
     # 切割数据集
@@ -105,9 +188,19 @@ if __name__ == '__main__':
     test_feature = test_feature.values
     train_labels = train_labels.tolist()
     test_labels = test_labels.tolist()
+    
     # 进行训练
     k = 8
     tp,pre_labels = classify(train_feature, test_feature, train_labels, test_labels, k)
     print(tp)
+
+    show_features_scatter(test_feature, test_labels, 0, 1)
+    show_features_scatter(test_feature, pre_labels, 0, 1)
+    show_features_scatter(test_feature, test_labels, 1, 2)
+    show_features_scatter(test_feature, pre_labels, 1, 2)
+    show_features_scatter(test_feature, test_labels, 0, 2)
+    show_features_scatter(test_feature, pre_labels, 0, 2)
+
+
 
 
