@@ -1,13 +1,13 @@
 * [线性回归案例学习笔记](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression#线性回归案例学习笔记)
-  * [线性回归原理](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression#1线性回归原理)
-  * [2HousePrice案例](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression#2HousePrice案例)
-    * [案例背景](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression#21案例背景)
-    * [案例实验](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression#22案例实验)
-      * [数据预处理](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression#221数据预处理)
-      * [特征工程](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression#222特征工程)
-      * [模型训练与评估](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression#223模型训练与评估)
-      * [结果可视化](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression#224结果可视化)
-  * [总结](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression#3总结)
+  * [线性回归原理](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression#1-线性回归原理)
+  * [HousePrice案例](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression#2-houseprice-案例)
+    * [案例背景](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression#21-案例背景)
+    * [案例实验](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression#22-案例实验)
+      * [数据预处理](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression#221-数据预处理)
+      * [特征工程](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression#222-特征工程)
+      * [模型训练与评估](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression#223-模型训练与评估)
+      * [结果可视化](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression#224-结果可视化)
+  * [总结](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression#3-总结)
 
 
 # 线性回归案例学习笔记
@@ -105,17 +105,34 @@ MEDV： 自住房的平均房价
 
 #### 2.2.2 特征工程
 
+**特征相关性分析:**
+
+``` python
+def show_corr(data):
+    plt.figure(figsize=(10,8))
+    g = sns.heatmap(data.corr(),annot=True,fmt = '.2f',cmap = 'coolwarm')
+    g.set_xlabel('corr')
+    plt.show()
+```
+    可以看出，特征间的相关性较强，其中RAD和TAX的相关性极高，达到了0.91
+    这里二者保留其一即可，这里我们保留了TAX特征，去掉RAD特征
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Regression/LinearRegression/特征相关性.jpg)
+
 **自变量-因变量关联性分析:**
+
+下面，我们列出部分自变量-应变量的关联分析图：
 
     DIS 和 MEDV
 
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Regression/LinearRegression/DIS.jpg)
 
     LSTAT 和 MEDV
 
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Regression/LinearRegression/LSTAT.jpg)
 
     RM 和 MEDV
 
-
+![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Regression/LinearRegression/RM.jpg)
 
 **去除异常值:**
 
@@ -123,21 +140,73 @@ MEDV： 自住房的平均房价
 i_ = y[y.MEDV == 50].index.tolist()
 dropdata(features,y,i_)
 ```
+    可以从前面的散点图看出，很多MEDV=50的点干扰了整体的样本。
+    原因是，很多售价超过50的样本也设置为了50，这会对分析最后的零售价造成干扰。
+    因此，这里我们选择了直接去除
 
 **数据归一化/标准化:**
 
     这里的连续特征的分布较大，需要对其进行归一化或标准化处理。
     由于数据集没有表现出明显的高斯分布或均匀分布的情况，这里我对两种方法都进行了尝试。
     
-
 #### 2.2.3 模型训练与评估
 
     这里使用了线性回归对模型进行训练
+    
+**归一化后数据模型**
+
+``` python
+lr_model coef: [[ -6.95395453   3.24273778  -3.88750597   0.10560699  -6.14608656
+                  19.7550797   -1.78413135 -14.66256722  -1.35834977  -8.01915567
+                   2.84586617 -11.13945679]]
+lr_model intercept:     [26.46737607]
+lr_model train_score:     0.7539138730050516
+lr_model test_score:      0.7815346895411278
+Mean squared error:      12.59
+```
+    coef 是模型的参数权重矩阵，即为 W
+    intercept 是模型的截距，即为 b
+    y = wx + b 就是拟合出的模型
+    这里的score是指R^2决定系数的得分
+    训练集得分为0.75左右
+    测试集得分为0.78左右
+    最后的平均方差在12.59左右
+
+**标准化后数据模型**
+
+``` python
+lr_model coef: [[-6.76494731e+01  9.42741522e+00 -4.86007158e+01  2.23695218e+02
+                 -5.47637154e+03  2.50492878e+03 -1.24100827e+01 -5.46324271e+02
+                 -7.06826152e+00 -4.30084480e+02  2.47961898e+00 -1.36570173e+02]]
+lr_model intercept:     [25.78539007]
+lr_model train_score:     0.784251588304244
+lr_model test_score:      0.8123073941114468
+Mean squared error:      10.82
+```
+    coef 是模型的参数权重矩阵，即为 W
+    intercept 是模型的截距，即为 b
+    y = wx + b 就是拟合出的模型
+    这里的score是指R^2决定系数的得分
+    训练集得分为0.78左右
+    测试集得分为0.81左右
+    最后的平均方差在10.82左右
+    
+**模型的效果一般，还有很大的提升空间  
+同时应该注意到标准化在这里比归一化效果要好  
+后面的模型优化，可以通过加强特征工程，或者将算法改成多项式回归来优化模型**
 
 #### 2.2.4 结果可视化 
     
-    未完待续...
+**归一化后预测值-真实值结果：**
 
+<img src='https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Regression/LinearRegression/归一化后.jpg' width = 60% height = 60% />
+    
+**标准化后预测值-真实值结果：**
+
+<img src='https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Regression/LinearRegression/标准差.jpg' width = 60% height = 60% />
 
 ## 3 总结
 
+    线性回归是一个非常常用的模型，sklearn等基础算法库已经实现得非常好了。  
+    如果不是从学习的角度出发，尽量不要去重复造轮子。  
+    我们使用的时候，更多的需要去思考特征的涵义和关联。  
