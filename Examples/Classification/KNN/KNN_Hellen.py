@@ -39,9 +39,15 @@ def get_label(train_feature, test_vec, train_labels, k=1):
         train_labels:   训练集的类别
         k：             选择多少个近邻
     Return：
-        str(label)：    预测这个测试向量的类别
+        str(prelabel)：    预测这个测试向量的类别
+        
+    这个过程稍微复杂一点，但是理解起来还是比较容易
+    先遍历所有训练集的特征矩阵，计算测试向量和所有训练集特征向量的欧式距离
+    根据欧式距离进行排序（将list转为array的原因是，因为list里嵌套了list，不好根据列的值进行排序）
+    通过计算一个 array 中前 k 个向量的label进行计算，将其作为预测的 prelabel
     '''
     all_distance_label = []
+    
     # 计算测试向量到所有训练向量的距离
     for i in range(len(train_feature)):
         distance_label = []
@@ -51,16 +57,18 @@ def get_label(train_feature, test_vec, train_labels, k=1):
         distance_label.append(vec_distance)
         distance_label.append(train_label)
         all_distance_label.append(distance_label)
+        
     # 将距离-类别的list转化为array数组
-    result_k = np.array(all_distance_label)
     # 根据距离进行排序(由小到大)
+    result_k = np.array(all_distance_label)
     order_distance = np.argsort(result_k[:,0],axis=0).tolist()
     result_k = result_k[order_distance]
+    
     # 获取前k个点的 距离-类别 数组
+    # 统计预测向量它的 k个近邻中最多的 label，将其作为预测的 prelabel
     top_k = np.array(result_k[:k,1])
-    # 统计预测向量 k个近邻中 最多的label
-    label = Counter(top_k).most_common(1)[0][0]
-    return str(label)
+    prelabel = Counter(top_k).most_common(1)[0][0]
+    return str(prelabel)
 
 
 def predict(train_feature, test_feature, train_labels, k):
@@ -75,6 +83,7 @@ def predict(train_feature, test_feature, train_labels, k):
         all_pre_label： 测试集预测的所有类别
     '''
     all_pre_label = []
+    # 其实就是遍历特征矩阵中所有向量
     for i in range(len(test_feature)):
         test_vec = test_feature[i]
         pre_label = get_label(train_feature, test_vec, train_labels, k)
@@ -97,6 +106,7 @@ def classify(train_feature, test_feature, train_labels, test_labels, k):
     '''
     error_counter = 0
     pre_labels = predict(train_feature, test_feature, train_labels, k)
+    # 对误分类的情况进行计数
     for i in range(len(test_labels)):
         pre_label, test_vec_label = pre_labels[i],test_labels[i]
         if str(test_vec_label) != str(pre_label):
@@ -105,19 +115,6 @@ def classify(train_feature, test_feature, train_labels, test_labels, k):
             continue
     true_probability = 1 - error_counter/len(test_feature)
     return true_probability,pre_labels
-
-
-def test():
-    '''
-    测试用例
-    '''
-    train_feature = np.array([[1.0,1.1],[1.0,1.0],[0,0],[0,0.1]])
-    train_labels = ['A','A','B','B']
-    test_feature = np.array([[0.9,1.2],[1.1,0.7],[-0.1,0.1],[0.3,0]])
-    test_labels = ['A','A','B','B']
-    k = 2
-    tp,pre_labels = classify(train_feature, test_feature, train_labels, test_labels, k)
-    print(tp)
 
 
 def autoNorm(dataSet):
@@ -172,6 +169,26 @@ def show_features_scatter(features, label, col1_num, col2_num):
     plt.show()
 
 
+def test():
+    '''
+    测试用例
+    '''
+    train_feature = np.array([[1.0,1.1],
+                              [1.0,1.0],
+                              [0.0,0.0],
+                              [0.0,0.1]])
+    train_labels = ['A','A','B','B']
+    test_feature = np.array([[ 0.9, 1.2],
+                             [ 1.1, 0.7],
+                             [-0.1, 0.1],
+                             [ 0.3, 0.0]])
+    test_labels = ['A','A','B','B']
+    k = 2
+    tp,pre_labels = classify(train_feature, test_feature, train_labels, test_labels, k)
+    print(tp)
+
+
+
 if __name__ == '__main__':
     # 读入数据
     columns = ['flight_mileage','games_time_percent','eat_icecream_liters','label']
@@ -195,11 +212,11 @@ if __name__ == '__main__':
     print(tp)
 
     show_features_scatter(test_feature, test_labels, 0, 1)
-    show_features_scatter(test_feature, pre_labels, 0, 1)
+    show_features_scatter(test_feature,  pre_labels, 0, 1)
     show_features_scatter(test_feature, test_labels, 1, 2)
-    show_features_scatter(test_feature, pre_labels, 1, 2)
+    show_features_scatter(test_feature,  pre_labels, 1, 2)
     show_features_scatter(test_feature, test_labels, 0, 2)
-    show_features_scatter(test_feature, pre_labels, 0, 2)
+    show_features_scatter(test_feature,  pre_labels, 0, 2)
 
 
 
