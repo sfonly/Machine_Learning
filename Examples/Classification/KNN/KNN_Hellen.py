@@ -198,7 +198,7 @@ def show_box(data, features, label):
 if __name__ == '__main__':
     # 读入数据
     columns = ['flight_mileage','games_time_percent','eat_icecream_liters','label']
-    ORGdata = pd.read_csv(open('C://Users/sf_on/Desktop/数据挖掘应用分析实验手册/K最近邻分类/Hellen.csv',
+    ORGdata = pd.read_csv(open('./Hellen.csv',
                      encoding='UTF-8'),encoding='UTF-8',header = None, names = columns)
 
     features = ['flight_mileage','games_time_percent','eat_icecream_liters']
