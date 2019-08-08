@@ -2,13 +2,14 @@
 """
 Created on Fri Jul 12 16:33:09 2019
 
-KNN Algorithm
+KNN
 
 @author: sf_on
 """
 
 import numpy as np
 import pandas as pd
+import seaborn as sns
 import matplotlib.pyplot as plt
 from collections import Counter
 from sklearn import model_selection
@@ -188,12 +189,21 @@ def test():
     print(tp)
 
 
+def show_box(data, features, label): 
+    for feature in features:
+        sns.boxplot(x = label, y = feature, data = data)
+        plt.show()
+
 
 if __name__ == '__main__':
     # 读入数据
     columns = ['flight_mileage','games_time_percent','eat_icecream_liters','label']
     ORGdata = pd.read_csv(open('C://Users/sf_on/Desktop/数据挖掘应用分析实验手册/K最近邻分类/Hellen.csv',
                      encoding='UTF-8'),encoding='UTF-8',header = None, names = columns)
+
+    features = ['flight_mileage','games_time_percent','eat_icecream_liters']
+    label = 'label'
+    show_box(ORGdata,features,label )
 
     # 数据归一化
     data, ranges, minVals =  autoNorm(ORGdata.iloc[:,:3])
@@ -209,14 +219,13 @@ if __name__ == '__main__':
     # 进行训练
     k = 8
     tp,pre_labels = classify(train_feature, test_feature, train_labels, test_labels, k)
-    print(tp)
+    print('KNN accuracy:',tp)
 
     show_features_scatter(test_feature, test_labels, 0, 1)
     show_features_scatter(test_feature,  pre_labels, 0, 1)
     show_features_scatter(test_feature, test_labels, 1, 2)
     show_features_scatter(test_feature,  pre_labels, 1, 2)
-    show_features_scatter(test_feature, test_labels, 0, 2)
-    show_features_scatter(test_feature,  pre_labels, 0, 2)
+
 
 
 
