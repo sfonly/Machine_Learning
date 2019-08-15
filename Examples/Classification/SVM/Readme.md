@@ -97,12 +97,49 @@ print(data[data['diagnosis'] >= 1].shape[0])
 #### 2.2.1 数据预处理
     
 **去除空值:**
-
-
+``` python
+print(data.info())
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 303 entries, 0 to 302
+Data columns (total 14 columns):
+age                     303 non-null float64
+sex                     303 non-null float64
+chest_pain              303 non-null float64
+blood pressure          303 non-null float64
+serum_cholestoral       303 non-null float64
+fasting_blood_sugar     303 non-null float64
+electrocardiographic    303 non-null float64
+max_heart_rate          303 non-null float64
+induced_angina          303 non-null float64
+ST_depression           303 non-null float64
+slope                   303 non-null float64
+vessels                 303 non-null object
+thal                    303 non-null object
+diagnosis               303 non-null int64
+```
+    
+实际上，在该数据集中，空值由 ‘？’ 代替，因此，需要对这种特殊字符进行处理
+这里，由于缺失的维度为离散值，且只有6个缺失值，因此用众数进行填充
+``` python
+def replaceNullvalues(data):
+    '''
+    用众数去除空值
+    Paramters：
+        data:       输入的数据集
+    Return:
+        data_:      用众数替换过后的数据集
+    '''
+    data_ = copy.deepcopy(data)
+    for c in data.columns:    
+        data_[c] = data_[c].apply(lambda x: data_[data_[c]!='?'][c].astype(float).mode() if x == '?' else x)
+        data_[c] = data_[c].astype(float)  
+    return data_  
+```
 
 #### 2.2.2 特征工程
 
 **特征相关性分析:**
+
 
 
 **去除异常值:**
