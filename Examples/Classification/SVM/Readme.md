@@ -140,19 +140,70 @@ def replaceNullvalues(data):
 
 **特征相关性分析:**
 
+    根据皮尔逊相关系数分析，特征之间的相关性在 (-0.5, 0.5) 区间内，可以全部保留
 
+<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/SVM/corr.jpg" width = 60% height = 60% />
 
-**去除异常值:**
+**连续特征分析:**
 
+    通过绘制联系特征的散点矩阵图，可以发现这些联系特征呈现非线性的情况，判断正常人和患病人员很难通过单一特征进行判别
+    
+<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/SVM/continues_features.jpg" width = 60% height = 60% />
 
-**数据归一化:**
+**数据标准化:**
 
+    因为特征间的差异巨大，加上之前分析连续特征时，这些特征大多呈现高斯分布
+    因此，这里对特征统一进行标准化处理
 
 #### 2.2.3 模型训练与评估
-
+``` python
+model = SVC(C=1.0, kernel= kernel, gamma='auto_deprecated',
+            shrinking=True, probability=False,
+            tol=1e-3, cache_size=200, class_weight=None,
+            verbose=False, max_iter=-1, decision_function_shape='ovr',
+            random_state=None)
+```
+    这里的kernel分别测试了线性核、高斯核、多项式核
+    最后发现，在当前数据集下，线性核的表现最好。
+    
+    sklearn具体的参数可以参考
+[SVC-sklearn官网](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC)
 
 #### 2.2.4 结果可视化 
-    
+```python
+accuracy score:  0.87
+f1 score:  0.8433734939759038
+tp = 35 , fp = 2
+fn = 11 , tn = 52
+              precision    recall  f1-score   support
+
+           0       0.83      0.96      0.89        54
+           1       0.95      0.76      0.84        46
+
+   micro avg       0.87      0.87      0.87       100
+   macro avg       0.89      0.86      0.87       100
+weighted avg       0.88      0.87      0.87       100
+```
+
+<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/SVM/confusion_matrix.jpg" width = 40% height = 40% />
+
+     这里评价的指标，首先是整个模型的准确率，在0.87左右（这个指标在本实验中，其实并不是特别重要）
+     主要的原因是，我们要做的是找出可能患病的人群，而不是找出没有患病的人群
+     因此，这里最重要的评价指标是tp和fn，即判断为 1 是的准确率和召回率
+     
+     我们希望准确率尽可能的大，并且召回率尽可能的小
+     准确率大，说明我们只要判断时病人，那么我们就没有发生误判
+     召回率高，就说明fn值小，我们没有遗漏，即不存在没有查出并的情况
+     
+     最后实际是准确率达到了0.95，还算是不错的指标。
+     但是召回率就不是很让人满意，这可能和数据样本数量太少有关
 
 ## 3 总结
 
+    SVM 的参数其实并不多，由于支持向量是计算出来的，如果支持向量没有变化，最后的模型就没有变化
+    在 Heartdisease 案例中，由于数据样本较少，调参过后，支持向量没有变化，最后模型就没有变化
+    但是并不代表 SVM 不需要调参，实际上核函数的选择、惩罚系数影响巨大
+    选择不同的核函数，还需要去调整不同核函数的参数，都会对模型的判断结果有影响
+
+  **SVM 的证明实在是太巧妙了，我画了很长的时间去理解和思考它背后的数学原理和推导过程，以及如何利用数学工具去解决和转化问题**
+   
