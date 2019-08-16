@@ -120,23 +120,30 @@ def data_standarlize(data, columns):
     standare_data = pd.DataFrame(standare_data, columns=columns)
     return standare_data
 
-def function_classification(x,y):
+def function_classification(x,y,kernel = 'rbf'):
     '''
     利用 SVC 方法对数据进行分类并测试
     Paramters：
         x:           特征矩阵
         y:           类标号  
+        kernel:      核函数
     Return:
         expected：   期望的类标号
         predicted：  预测的类标号
     '''
     x_train, x_test, y_train, y_test = model_selection.train_test_split(x, y, test_size=0.33,random_state=6)
-    model = SVC(kernel = 'linear')
+    
+    model = SVC(C=1.0, kernel= kernel, gamma='auto_deprecated',
+                shrinking=True, probability=False,
+                tol=0.001, cache_size=200, class_weight=None,
+                verbose=False, max_iter=-1, decision_function_shape='ovr',
+                random_state=33)
+
     model.fit(x_train, y_train)
     expected = y_test
     predicted = model.predict(x_test)
     f1 = f1_score(expected, predicted)
-    tn,fp,fn,tp = confusion_matrix(expected, predicted, sample_weight=None).ravel()
+    tn, fp, fn, tp = confusion_matrix(expected, predicted, sample_weight=None).ravel()
     
     print('accuracy score: ', model.score(x_test,y_test))
     print('f1 score: ', f1)
@@ -145,11 +152,15 @@ def function_classification(x,y):
     print(metrics.classification_report(expected, predicted)) 
     return expected,predicted 
 
-def plot_confusion_matrix(cm, classes, title='Confusion matrix', cmap=plt.cm.Blues):
+def plot_confusion_matrix(cm, classes, title='Confusion matrix'):
     '''
     绘制混淆函数的可视化方法
+    Paramters：
+        cm:          混淆矩阵
+        classes:     标号  
+        title：      图表标题
     '''
-    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.imshow(cm, interpolation='nearest', cmap = plt.cm.Blues)
     plt.title(title)
     plt.colorbar()
     tick_marks = np.arange(len(classes))
@@ -202,9 +213,14 @@ if __name__ == '__main__':
     index_ = index2isnull(data)
     
     print('data.shape: ',data.shape)
+    print(data.info())
     print('data.describe():',data.describe())
     print('index_:',index_)
     print('index_.length:',len(index_))
+    print(data[data['diagnosis'] == 0].shape[0])
+    print(data[data['diagnosis'] >= 1].shape[0])
+    print(data[data['diagnosis'] == 2].shape[0])
+    print(data[data['diagnosis'] == 3].shape[0])
     
     # 替换数据集中的空值
     data_new = replaceNullvalues(data)
@@ -218,12 +234,12 @@ if __name__ == '__main__':
     continus_features = ['age','blood pressure','serum_cholestoral','max_heart_rate','ST_depression','diag_int']
     scatter_features_matrics(data_new, continus_features, 'diag_int')
     
-    test = ['age','sex','chest_pain','blood pressure','serum_cholestoral','fasting_blood_sugar',
+    cols = ['age','sex','chest_pain','blood pressure','serum_cholestoral','fasting_blood_sugar',
                    'electrocardiographic','max_heart_rate','induced_angina','ST_depression','slope','vessels','thal']
     
-    standarlize = data_standarlize(data_new, test)
+    standarlize = data_standarlize(data_new, cols)
     
-    expected,predicted = function_classification(standarlize,data_new['diag_int'])
+    expected,predicted = function_classification(standarlize,data_new['diag_int'],'linear')
     function_plot(expected,predicted)
     
     # output_csv(x_standardized,data_new['diag_int'])
