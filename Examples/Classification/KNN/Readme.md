@@ -85,14 +85,15 @@ dtype: int64
 
 **特征相关性分析:**
 
-    Hellen 不同等级的约会对象，与航空里程数的盒须图  
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/KNN/flight_mileage.jpg)
+    Hellen 不同等级的约会对象，与航空里程数的盒须图   
 
-    Hellen 不同等级的约会对象，与每天玩游戏时间占比的盒须图  
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/KNN/games_time_percent.jpg)
+<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/KNN/flight_mileage.jpg" width=40% height=40% />
+
+    Hellen 不同等级的约会对象，与每天玩游戏时间占比的盒须图   
+<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/KNN/games_time_percent.jpg" width=40% height=40% />
 
     Hellen 不同等级的约会对象，与每周吃冰淇淋的公升数的盒须图  
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/KNN/eat_icecream_liters.jpg)
+<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/KNN/eat_icecream_liters.jpg" width=40% height=40% />
 
 **去除异常值:**
 
@@ -120,22 +121,22 @@ print('KNN accuracy:',tp)
     flight_mileage-games_time_percent散点图  
     x轴为flight_mileage，y轴为games_time_percent  
     不同的颜色为真实的类别标签  
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/KNN/test-test01.jpg)
+<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/KNN/test-test01.jpg" width=50% height=50% />
 
     flight_mileage-games_time_percent散点图  
     x轴为flight_mileage，y轴为games_time_percent  
     不同的颜色为预测的类别标签  
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/KNN/test-pre01.jpg)
+<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/KNN/test-pre01.jpg" width=50% height=50% />
 
     games_time_percent-eat_icecream_liters散点图  
     x轴为games_time_percent，y轴为eat_icecream_liters
     不同的颜色为真实的类别标签  
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/KNN/test-test12.jpg)
+<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/KNN/test-test12.jpg" width=50% height=50% />
 
     games_time_percent-eat_icecream_liters散点图  
     x轴为games_time_percent，y轴为eat_icecream_liters
     不同的颜色为预测的类别标签  
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/KNN/test-pre12.jpg)
+<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/KNN/test-pre12.jpg" width=50% height=50% />
 
 ## 3 总结
 
