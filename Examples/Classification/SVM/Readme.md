@@ -7,7 +7,7 @@
       * [特征工程](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/SVM#222-特征工程)
       * [模型训练与评估](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/SVM#223-模型训练与评估)
       * [结果可视化](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/SVM#224-结果可视化)
-  * [总结](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/KSVM#3-总结)
+  * [总结](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/SVM#3-总结)
 
 
 # SVM案例学习笔记
