@@ -2,6 +2,8 @@
 """
 Created on Thu Jul 18 15:29:52 2019
 
+决策树： DecisionTree
+
 @author: sf_on
 """
 
@@ -15,14 +17,28 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier 
 from sklearn import tree 
 
-# 绘制盒须图
 def show_box(data, features, label): 
+    '''
+    查看数据盒须图
+    Paramters：
+        data:       原始数据集
+        cols:       特征
+        label：     类标号
+    '''
     for feature in features:
         sns.boxplot(x = label, y = feature, data = data)
         plt.show()
 
-# 找异常点，两个以上特征异常认为是异常点
 def find_outlier(data,features,label):    
+    '''
+    寻找异常点
+    Paramters：
+        data:                数据集
+        features：           特征
+        label：              类标号
+    Return：
+        multiple_outliers：  具有3个异常特征时的特征值index的list
+    '''
     grouped = data.groupby(data[label])
     outlier_list = []
     for col in features:
@@ -37,8 +53,12 @@ def find_outlier(data,features,label):
     multiple_outliers=list(k for k,v in outlier_indices.items() if v > 2)
     return multiple_outliers
 
-# 自行实现散点柱形矩阵图
 def feature_matrix_show(data):
+    '''
+    实现散点矩阵图
+    Paramters：
+        data:       原始数据集
+    '''
     grouped = data.groupby(data['class'])
     p = []
     for col in features:
@@ -64,37 +84,48 @@ def feature_matrix_show(data):
                 cube += 1
     plt.tight_layout(pad=0)
 
-def loadData():
-    columns = ['sepal_length','sepal_width','petal_length','petal_width','class']
-    data = pd.read_csv(open('./iris.csv'),header=None,names = columns)
-    return data
+def DecisionTree_classification(data, mode):
+    '''
+    利用决策树对其分类
+    Paramters：
+        data:       原始数据集
+        cols:       特征
+        label：     类标号
+    '''
+    # 切割数据并绘制模型，由于模型比较简单，就没有做剪枝和参数配置
+    X_train, X_test, y_train, y_test = train_test_split(data.iloc[:,:4], data.iloc[:,4], test_size=0.3,random_state=32)
+    
+    clf = DecisionTreeClassifier(criterion = mode)
+    clf.fit(X_train,y_train)
+    
+    print('clf.score:',clf.score(X_test,y_test))
+    
+    # 绘制决策树图，需安装有graphviz包
+    dot_data = tree.export_graphviz(clf, out_file=None,feature_names=features,class_names=True, filled=True, special_characters=True)
+    graph = graphviz.Source(dot_data)
+    graph.view()
+
+
 
 if __name__ == '__main__':
     
-    # 载入数据
-    data = loadData()
-    data.isnull().sum()
+    columns = ['sepal_length','sepal_width','petal_length','petal_width','class']
+    data = pd.read_csv(open(./iris.csv'),header=None,names = columns)
+    
+    print(data.describe())
+    print(data.isnull().sum())
+    
     features = ['sepal_length','sepal_width','petal_length','petal_width']
     label = 'class'
     
     # 绘制盒须图，寻找异常点
     show_box(data, features,label)
     multiple_outliers = find_outlier(data,features,label)
-    print(multiple_outliers)
+    print('multiple_outliers',multiple_outliers)
     
     # 绘制散点柱状矩阵图
     data_show = data.replace(['Iris-setosa','Iris-versicolor','Iris-virginica'],['blueviolet','blue','g']) 
     pd.plotting.scatter_matrix(data_show.iloc[:,:4], alpha=0.7, c=data_show.iloc[:,4],figsize=(12,12), diagonal='hist')
     # feature_matrix_show(data_show)
-    
-    # 切割数据并绘制模型，由于模型比较简单，就没有做剪枝及其他参数配置
-    X_train, X_test, y_train, y_test = train_test_split(data.iloc[:,:4], data.iloc[:,4], test_size=0.3,random_state=32)
-    # 采用信息增益来计算，也可以用cart的gini系数来计算
-    clf = DecisionTreeClassifier(criterion='entropy')
-    clf.fit(X_train,y_train)
-    print(clf.score(X_test,y_test))
-    
-    # 绘制决策树图，需安装有graphviz包
-    dot_data = tree.export_graphviz(clf, out_file=None,feature_names=features,class_names=True, filled=True, special_characters=True)
-    graph = graphviz.Source(dot_data)
-    graph.view()
+
+    DecisionTree_classification(data, 'entropy')
