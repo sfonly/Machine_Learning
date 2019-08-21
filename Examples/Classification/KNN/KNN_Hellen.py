@@ -2,7 +2,7 @@
 """
 Created on Fri Jul 12 16:33:09 2019
 
-KNN
+KNN Algorithm
 
 @author: sf_on
 """
@@ -44,7 +44,7 @@ def get_label(train_feature, test_vec, train_labels, k=1):
         
     这个过程稍微复杂一点，但是理解起来还是比较容易
     先遍历所有训练集的特征矩阵，计算测试向量和所有训练集特征向量的欧式距离
-    根据欧式距离进行排序（将list转为array的原因是，因为list里嵌套了list，不好根据列的值进行排序）
+    根据欧式距离进行排序（将list转为array的原因是，因为list里嵌套了list，不好根据list的值进行排序）
     通过计算一个 array 中前 k 个向量的label进行计算，将其作为预测的 prelabel
     '''
     all_distance_label = []
@@ -161,12 +161,10 @@ def show_features_scatter(features, label, col1_num, col2_num):
     plt.xlabel(col1_name)
     plt.ylabel(col2_name)
     plt.title(col1_name + ' VS '+ col2_name)
-    
     ax.scatter(features[ind1,col1_num], features[ind1,col2_num], c="red",label="largeDoses" ,s=20)
     ax.scatter(features[ind2,col1_num], features[ind2,col2_num], c="blue",label="smallDoses",s=20)
     ax.scatter(features[ind3,col1_num], features[ind3,col2_num], c="green",label="didntLike",s=20)
     ax.legend(loc='best')
-    
     plt.show()
 
 
@@ -190,6 +188,13 @@ def test():
 
 
 def show_box(data, features, label): 
+    '''
+    绘制两个特征的散点图和类别
+    Paramters：
+        data:        数据集
+        features：   特征的list
+        label:       类标号
+    '''
     for feature in features:
         sns.boxplot(x = label, y = feature, data = data)
         plt.show()
@@ -201,6 +206,13 @@ if __name__ == '__main__':
     ORGdata = pd.read_csv(open('./Hellen.csv',
                      encoding='UTF-8'),encoding='UTF-8',header = None, names = columns)
 
+    print(ORGdata.label.unique())
+    print(ORGdata[ORGdata['label'] == 'largeDoses'].shape[0])
+    print(ORGdata[ORGdata['label'] == 'smallDoses'].shape[0])
+    print(ORGdata[ORGdata['label'] == 'didntLike'].shape[0])
+    
+    print(ORGdata.isnull().sum())
+    
     features = ['flight_mileage','games_time_percent','eat_icecream_liters']
     label = 'label'
     show_box(ORGdata,features,label )
@@ -218,7 +230,9 @@ if __name__ == '__main__':
     
     # 进行训练
     k = 8
+    predicted = predict(train_feature, test_feature, train_labels, k)
     tp,pre_labels = classify(train_feature, test_feature, train_labels, test_labels, k)
+    print('KNN predict:', predicted)
     print('KNN accuracy:',tp)
 
     show_features_scatter(test_feature, test_labels, 0, 1)
