@@ -163,15 +163,21 @@ def find_outlier(data,features,label,n):
 
 #### 2.2.2 特征工程
 
-**特征相关性分析:**
+**特征间的相关性分析:**
 
-    由于朴素贝叶斯的特性，我们要尽量保证特征间无关（朴素），特征与类标号相关
-    
-<img src = 'https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/NaiveBayes/corr.jpg' width= 70% height= 70%/>
-
+    由于朴素贝叶斯的特性，我们要尽量保证特征间无关（朴素）
     首先来看特征间的相关性
     由于 Flavanoid 和 Total phenols 间相关性极高，并且和 Nonflavanoid phenols 呈极高的负相关性
     因此，可以认为存在一定的特征冗余，我们这里选择去除 Flavanoid
+    
+<img src='https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/NaiveBayes/corr.jpg' width= 60% height= 60% />
+
+**特征与类标号的相关性分析:**
+
+    同时，我们要保证特征与类标号存在一定的相关性
+    再来看特征与类标号之间的相关性
+    在通过皮尔逊相关系数，可以看出 Ash 和类标号之间相关性极低，可以说不相关
+    因此，这里我们选择去除 Ash 特征
 
 ``` python
                          columns              corr_value
@@ -189,13 +195,10 @@ def find_outlier(data,features,label,n):
 4                      Magnesium    [0.2128703266316483]
 2                            Ash  [0.031039521734865475]
 ```
-    再来看特征与类标号之间的相关性
-    在通过皮尔逊相关系数，可以看出 Ash 和类标号之间相关性极低，可以说不相关
-    因此，这里我们选择去除 Ash 特征
     
 **特征散点矩阵图:**
 
-<img src = 'https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/NaiveBayes/matrix.jpg' width= 70% height= 70%/>
+<img src = 'https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/NaiveBayes/matrix.jpg' width= 70% height= 70% />
 
     可以看出，有一些特征间是线性相关的
     但是整体而言，所有特征都符合高斯分布
