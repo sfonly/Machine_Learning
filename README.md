@@ -3,32 +3,32 @@
     来源于UCI、Kaggle，理论部分会不断填充。
     
 ## 目录
-  * 线性回归算法
-    * [线性回归算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression)
-  * [感知机算法](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron)
-    * [感知机算法python实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/Perceptron)
+  * 线性回归算法原理
+    * [线性回归预测二手房房价](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression)
+  * [感知机算法原理](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron)
+    * [自行实现感知机算法](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/Perceptron)
   * KNN算法
-    * [KNN算法python实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/KNN)
-    * [KNN算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/KNN)
-  * [决策树算法](https://github.com/sfonly/Machine_Learning/tree/master/Theory/DecisionTree)
-    * [CART算法python实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/KNN)
-    * [决策树算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/DecisionTree)
+    * [自行实现KNN算法](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/KNN)
+    * [KNN预测Hellen约会](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/KNN)
+  * [决策树算法原理](https://github.com/sfonly/Machine_Learning/tree/master/Theory/DecisionTree)
+    * [自行实现CART算法](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/KNN)
+    * [决策树判断鸢尾花品种](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/DecisionTree)
   * 逻辑回归算法
-    * [逻辑回归算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/LogisticRegression)
+    * [逻辑回归判断富裕人群](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/LogisticRegression)
   * 朴素贝叶斯算法
-    * [朴素贝叶斯算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/NaiveBayes)
+    * [朴素贝叶斯判读红酒类别](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/NaiveBayes)
   * 支持向量机算法
-    * [支持向量机算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/SVM)
+    * [支持向量机判断心脏病](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/SVM)
   * 随机森林算法
-    * [随机森林算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/RandomForest)
+    * [随机森林预测泰坦尼克生还状况](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/RandomForest)
   * BP神经网络算法
-    * [BP神经网络算法python实现](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/BP_NeuralNetwork)
+    * [自行实现BP神经网络算法](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/BP_NeuralNetwork)
   * K-Means算法
-    * [K-Means算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Cluster/KMeans)
+    * [K-Means实现中国城市地理空间聚类](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Cluster/KMeans)
   * BIRCH算法
-    * [BIRCH算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Cluster/BIRCH)
+    * [BIRCH层次聚类示例](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Cluster/BIRCH)
   * Adaboost算法
-    * [Adaboost算法sklearn实现](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/Adaboost)
+    * [Adaboost算法示例](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/Adaboost)
     
 
 ## 我的机器学习知识框架
