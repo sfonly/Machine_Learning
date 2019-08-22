@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import copy
 from math import sqrt
 from collections import Counter
 from sklearn import model_selection
@@ -78,7 +79,6 @@ def pearson(x,y):
         pearson.append(abs(corrcoef(x[col].values,y.values)))
     pearson_x = pd.DataFrame({'columns':x.columns,'corr_value':pearson})
     pearson_x = pearson_x.sort_values(by='corr_value',ascending=False)
-    print(pearson_x)
     return pearson_x
 
 def show_boxplot(data,cols,label):
@@ -102,7 +102,7 @@ def find_outlier(data,features,label,n):
         data:                数据集
         features：           特征
         label：              类标号
-        n:                   设置有多少个异常的特征时，认为是异常点
+        n:                   设置有n个异常的特征时，认为是异常点
     Return：
         multiple_outliers：  异常值的list
     '''
@@ -139,8 +139,9 @@ def scatter_features_matrics(x,y,label):
         y:           预测空间
         label：      类标号
     '''
-    y[label] = y[label].replace([1,2,3],['b','g','r']) 
-    pd.plotting.scatter_matrix(x, alpha=0.7, c=y[label],figsize=(20,20), diagonal='hist')
+    yl = copy.deepcopy(y)
+    yl[label] = yl[label].replace([1,2,3],['b','g','r']) 
+    pd.plotting.scatter_matrix(x, alpha=0.7, c=yl[label],figsize=(20,20), diagonal='hist')
     plt.show()
 
 def classification(x,y):
@@ -155,7 +156,7 @@ def classification(x,y):
     model.fit(x_train, y_train)
     expected = y_test
     predicted = model.predict(x_test)
-    print(model.score(x_test,y_test))
+    print('accuracy score:', model.score(x_test,y_test))
     print(metrics.classification_report(expected, predicted)) 
     print(confusion_matrix(expected, predicted, sample_weight=None))
 
@@ -209,7 +210,9 @@ if __name__ == '__main__':
     pearson_xy = pearson(x,y)
     corr = x.corr()
     show_corr(x)
+    print(pearson_xy)
     x = x.drop(['Flavanoid','Ash'],axis = 1)
+    
     scatter_features_matrics(x,y,'category')    
 
     classification(x,y)    
