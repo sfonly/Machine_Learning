@@ -4,14 +4,15 @@
     
 ## 目录
   * 线性回归算法原理
+    * [python自行实现局部加权线性回归](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/Locally_weighted_linear_regression)
     * [线性回归预测二手房房价](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Regression/LinearRegression)
   * [感知机算法原理](https://github.com/sfonly/Machine_Learning/tree/master/Theory/Perceptron)
-    * [自行实现感知机算法](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/Perceptron)
+    * [python自行实现感知机算法](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/Perceptron)
   * KNN算法原理
-    * [自行实现KNN算法](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/KNN)
+    * [python自行实现KNN算法](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/KNN)
     * [KNN预测Hellen约会](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/KNN)
   * [决策树算法原理](https://github.com/sfonly/Machine_Learning/tree/master/Theory/DecisionTree)
-    * [自行实现CART算法](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/CART_TREE)
+    * [python自行实现CART算法](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/CART_TREE)
     * [决策树判断鸢尾花品种](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/DecisionTree)
   * 逻辑回归算法原理
     * [逻辑回归判断富裕人群](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/LogisticRegression)
@@ -22,7 +23,7 @@
   * 随机森林算法原理
     * [随机森林预测泰坦尼克号生还状况](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Classification/RandomForest)
   * BP神经网络算法原理
-    * [自行实现BP神经网络算法](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/BP_NeuralNetwork)
+    * [python自行实现BP神经网络算法](https://github.com/sfonly/Machine_Learning/tree/master/Algorithm/BP_NeuralNetwork)
   * K-Means算法原理
     * [K-Means实现中国城市地理空间聚类](https://github.com/sfonly/Machine_Learning/tree/master/Examples/Cluster/KMeans)
   * BIRCH算法原理
