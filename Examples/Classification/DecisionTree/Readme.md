@@ -23,7 +23,7 @@
     一般算法中都是以信息熵为判定标准。
     信息论之父香农借鉴了热力学的概念，把信息中排除了冗余后的平均信息量称为“信息熵”，并给出了计算信息熵的数学表达式。  
 
-<img src = 'https://github.com/sfonly/Machine_Learning/blob/master/img_folder/examples/1563877701(1).jpg' width = 40% height=40% />
+<img src = './pictures/1563877701(1).jpg' width = 40% height=40% />
 
 **信息熵即是表示事件所包含信息量大小的概念。  
 我们所知事件的信息量越小，事件的发生概率越不确定，信息熵越大；  
@@ -119,10 +119,10 @@
 
     查看各特征的盒须图：
     
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/examples/1563877428(1).jpg)
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/examples/1563877462(1).jpg)
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/examples/1563877471(1).jpg)
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/examples/1563877485(1).jpg)
+![loss](./pictures/1563877428(1).jpg)
+![loss](./pictures/1563877462(1).jpg)
+![loss](./pictures/1563877471(1).jpg)
+![loss](./pictures/1563877485(1).jpg)
 
     可以发现部分特征有超出上下线的异常，但也可能鸢尾花的性状就是这样，比如花骨朵小一点什么的
     我认为只有同时具备了两个以上的异常特征时，才算作是异常点，予以去除。
@@ -130,7 +130,7 @@
     
     然后利用散点柱状矩阵，查看三种鸢尾花的特征关联性
     
-<img src = 'https://github.com/sfonly/Machine_Learning/blob/master/img_folder/examples/1563877498(1).jpg' width = 50% height=50% />
+<img src = './pictures/1563877498(1).jpg' width = 60% height=60% />
 
     可以看出：
     Iris-setosa 这种鸢尾花和另外两种鸢尾花差别较大
@@ -160,7 +160,7 @@ clf.score: 0.9777777777777777
     决策树属于易于理解，符合人类思维逻辑的算法之一，可视化效果也较好
     这里我通过graphviz包实现了决策树图的可视化，需要在本地电脑安装graphviz包，并将其启动路径加入到系统环境变量中
 
-<img src = 'https://github.com/sfonly/Machine_Learning/blob/master/img_folder/examples/1563879621(1).jpg' width = 80% height=80% />
+<img src = './pictures/1563879621(1).jpg' width = 80% height=80% />
 
 ## 3 总结
 
