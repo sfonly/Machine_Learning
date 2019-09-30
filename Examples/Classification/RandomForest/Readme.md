@@ -56,7 +56,6 @@ Survived: 490
 Not Survived: 806
 ```
 
-
 ### 2.2 案例实验
 
 #### 2.2.1 数据预处理
@@ -98,7 +97,6 @@ Embarked          2
 dtype: int64
 ```
 
-
 **去除异常值:**  
 
 ``` python
@@ -117,26 +115,131 @@ line: 1079, Age: nan, SibSp: 8, Parch: 2, Fare: 69.55
 line: 1251, Age: 14.5, SibSp: 8, Parch: 2, Fare: 69.55
 ```
 
-
 #### 2.2.2 特征工程
 
 **特征相关性分析:**
 
-![loss](./)
+![loss](./pictures/corr.jpg)
     
-**连续特征分析:**
+**特征分析:**
 
-    
+![loss](./pictures/Sex_barplot.png)
+
+![loss](./pictures/SibSp_barplot.png)
+
+![loss](./pictures/Parch_barplot.png)
+
+![loss](./pictures/Pclass_barplot.png)
+
+![loss](./pictures/Fare_kdeplot.png)
+
+![loss](./pictures/Fare_distplot.png)
+
+![loss](./pictures/Fare_Log_distplot.png)
+
+![loss](./pictures/Embarked_barplot.png)
+
+![loss](./pictures/Title_barplot.png)
+
+![loss](./pictures/Title_new_barplot.png)
+
+![loss](./pictures/Age_kdeplot.png)
+
+![loss](./pictures/Age_factorplot.png)
+
+![loss](./pictures/Age_new_kdeplot.png)
+
+![loss](./pictures/Age_new_factorolot.png)
+
+![loss](./pictures/Title_new_barplot.png)
+
+
+
+
+
+
 **数据标准化:**
 
 
 #### 2.2.3 模型训练与评估
 
+**利用网格参数和十择法寻找最优化参数:**  
 
+    设置网格参数，以及对于的方法封装  
+``` python
+# 设置随机森林模型参数网格
+rf_param_grid = {'max_depth' : [None],
+                  'max_features' : [4, 5, 6, 7, 8],
+                  'min_samples_split' : [2, 3, 4],
+                  'min_samples_leaf' : [2, 3, 4],
+                  'bootstrap' : [False],
+                  'n_estimators' : [70, 80, 90, 100, 110],
+                  'criterion': ['gini']}
 
+def Kfold_RF(X_train, X_test, y_train, y_test, param_grid, k = 10):
+    '''
+    采用十择法和参数自动寻优(网格搜索)找到一个近似的优化参数
+    Parameters:
+        X_train, X_test:        数据集
+        y_train, y_test：       特征
+        param_grid：            参数网格 
+        k：                     十择法默认为 10
+    '''
+    RFC = RandomForestClassifier()
+    kfold = KFold(n_splits = k)
+    gsRFC = GridSearchCV(RFC, param_grid = param_grid, cv= kfold, scoring='accuracy', n_jobs= 1, verbose = 1)
+    gsRFC.fit(X_train,y_train)
+    
+    print('----------------------------------------')
+    print('best_estimator_: ', gsRFC.best_estimator_)
+    print('----------------------------------------')
+    print('best_params_: ', gsRFC.best_params_)
+    print('----------------------------------------')
+    print('best_score_: ', gsRFC.best_score_ )
+    print('----------------------------------------')
+```
+
+    结果
+``` python
+----------------------------------------
+best_estimator_:  RandomForestClassifier(bootstrap=False, class_weight=None, criterion='gini',
+            max_depth=None, max_features=5, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=4, min_samples_split=3,
+            min_weight_fraction_leaf=0.0, n_estimators=70, n_jobs=None,
+            oob_score=False, random_state=None, verbose=0,
+            warm_start=False)
+----------------------------------------
+best_params_:  {'bootstrap': False, 'criterion': 'gini', 'max_depth': None, 'max_features': 5, 'min_samples_leaf': 4, 'min_samples_split': 3, 'n_estimators': 70}
+----------------------------------------
+best_score_:  0.8743109151047409
+----------------------------------------
+```
+
+**随机森林建模:**  
+``` python
+# 找出最优化的随机森林参数
+rfc_new = RandomForestClassifier(bootstrap=False, class_weight=None, criterion='gini',
+            max_depth=None, max_features=7, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=3, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, n_estimators=80, n_jobs=None,
+            oob_score=False, random_state=None, verbose=0,
+            warm_start=False)
+rfc_new.fit(X_train,y_train)
+print('rfc_new.score(train):', rfc_new.score(X_train,y_train))
+print('rfc_new.score(test):', rfc_new.score(X_test,y_test))
+
+rfc_new.score(train): 0.8930540242557883
+rfc_new.score(test): 0.8534704370179949
+```
 #### 2.2.4 结果可视化 
 
+**学习曲线:**  
+![loss](./pictures/RF_learning_curves.png)
 
+**特征重要性排名:**  
+![loss](./pictures/Features_Importance.png)
 
 
 ## 3 总结

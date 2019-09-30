@@ -282,30 +282,31 @@ def importance_feature(data, estimator, k):
 
 if __name__ == '__main__':    
 
-    train = pd.read_csv(open('./titanic_train.csv',encoding='UTF-8'),encoding='UTF-8')
-    test = pd.read_csv(open('./titanic_test.csv',encoding='UTF-8'),encoding='UTF-8')
+    train = pd.read_csv(open('C://Users/sf_on/Desktop/数据挖掘应用分析实验手册/随机森林/titanic_train.csv',encoding='UTF-8'),encoding='UTF-8')
+    test = pd.read_csv(open('C://Users/sf_on/Desktop/数据挖掘应用分析实验手册/随机森林/titanic_test.csv',encoding='UTF-8'),encoding='UTF-8')
     
     # 查看kaggle上数据集的特征
     print(train.info())
-    print(train.isnull().sum())
     print(test.info())
-    print(test.isnull().sum())
     
     # 将二者合并为一个数据集
     dataSet = pd.concat(objs = [train,test],axis=0).reset_index(drop=True)
     print(dataSet.info())
     print(dataSet.isnull().sum())
     
+    print('Survived: ', dataSet[dataSet['Survived'] == 1].shape[0])
+    print('Not Survived:',dataSet[dataSet['Survived'] == 0].shape[0])
+    
     # 查看数据集中连续特征的情况
     continues_features = ['Age','SibSp','Parch','Fare']
     for feature in continues_features:
         print(dataSet[feature].describe())
-        print(dataSet[feature].isnull().sum())
+        print('%s is null: %s' %(feature,dataSet[feature].isnull().sum()))
     
     # 处理特异点，以及查看特征相关性
     dataSet = handle_outliers(dataSet, continues_features, k = 3)
     show_corr(dataSet)
-    np.shape(dataSet)
+    print(np.shape(dataSet))
     
     # ----------------------------------
     # 数据探索
@@ -326,8 +327,40 @@ if __name__ == '__main__':
     dataSet['Embarked'] = dataSet['Embarked'].fillna(dataSet['Embarked'].describe().top)
     barplot_Survived(dataSet, 'Embarked')
     
-    # FamilyName, 用处理过后的Title_name, 代替FamilyName
+    # FamilyName
     print(dataSet['FamilyName'].head())
+    
+    # =============================================================================
+    # Mr.= mister，先生
+    # Mrs.= mistress，太太/夫人
+    # Miss,复数为misses，对未婚妇女用
+    # Ms.或Mz，美国近来用来称呼婚姻状态不明的妇女
+    # Mme Madame简写是Mme.,复数是mesdames(简写是Mme)
+    # Mlle,小姐
+    # Lady, 女士，指成年女子，有些人尤其是长者认为这样说比较礼貌
+    # Dona，是西班牙语对女子的称谓，相当于英语的 Lady
+    # Master，佣人对未成年男少主人的称呼,相当于汉语的'少爷'。
+    # Mr. Mister的略字,相当于汉语中的'先生',是对男性一般的称呼,区别于有头衔的人们,如Doctor, Professor,Colonel等
+    # Don，n. <西>（置于男士名字前的尊称）先生，堂
+    # jonkheer 最低的贵族头衔
+    # Sir 贵族头衔
+    # Rev.= reverend，用于基督教的牧师，如the Rev. Mr.Smith
+    # Dr.= doctor，医生/博士
+    # Capt 船长
+    # Colonel，上校
+    # major，意思有少校人意思
+    # theCountess 女伯爵
+    # =============================================================================
+    
+    # =============================================================================
+    # 第一类：'Mr', 'Don' 普通男性
+    # 第二类：'Mrs','Miss','Mme','Ms','Lady','Dona','Mlle','theCountess'  女性
+    # 第三类：'Major','Col','Dr' 军官和医生
+    # 第四类：'Sir','Master','Jonkheer'  贵族男性
+    # 第五类：'Rev','Capt'  基本不可能幸存的职业
+    # =============================================================================
+
+    # 查看处理过后的Title_name, 并用其代替FamilyName
     preprocesing_Firstname(dataSet)
     barplot_Survived(dataSet,'Title_new')
     
@@ -351,7 +384,7 @@ if __name__ == '__main__':
     barplot_Survived(dataSet,'Ticket_new')
     print(dataSet['Ticket_new'].describe())
     
-    # ----------------------------------------
+    # --------------------------
     # 数据预处理
     data = dataSet[['Survived','Pclass','Sex','Age','SibSp','Parch','Fare_log',
                     'Embarked','Title_new','Ticket_new']]
@@ -398,8 +431,8 @@ if __name__ == '__main__':
                 warm_start=False)
     rfc_new.fit(X_train,y_train)
     
-    print(rfc_new.score(X_train,y_train))
-    print(rfc_new.score(X_test,y_test))
+    print('rfc_new.score(train):', rfc_new.score(X_train,y_train))
+    print('rfc_new.score(test):', rfc_new.score(X_test,y_test))
     
     plot_learning_curve(rfc_new,X_train,y_train) # 绘制学习曲线
     importance_feature(X_train, rfc_new, 30) # 查看最重要的 k 个特征
