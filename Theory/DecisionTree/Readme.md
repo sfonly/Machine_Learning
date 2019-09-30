@@ -27,18 +27,18 @@
 [维基百科-决策树](https://zh.wikipedia.org/wiki/决策树)
 
 **假设，我们现在有客户购买电脑的数据，能够从下面的数据中推断出，哪些客户是想要购买电脑的吗？**   
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/DecisionTree/数据1.jpg" width = 50% height = 50% />
+<img src="./pictures/数据1.jpg" width = 50% height = 50% />
 
 **IF-THEN规则：**  
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/DecisionTree/IF-Then规则.jpg" width = 80% height = 80% />
+<img src="./pictures/IF-Then规则.jpg" width = 80% height = 80% />
 
 **好了，这就是我们的大脑凭着 直觉 建立好的决策树：**  
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/DecisionTree/决策树1.jpg" width = 50% height = 50% />
+<img src="./pictures/决策树1.jpg" width = 50% height = 50% />
 
 ## 如何建立决策树
 
 **那么，应该怎么建立决策树呢？**  
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/DecisionTree/如何建树.jpg" width = 80% height = 80% />
+<img src="./pictures/如何建树.jpg" width = 80% height = 80% />
 
 **思考：**  
     为什么是最小决策树？ ———— 奥卡姆剃刀  
@@ -51,13 +51,13 @@
 [维基百科-信息熵](https://zh.wikipedia.org/wiki/熵_(信息论))
 
 #### 信息论之父——香农
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/DecisionTree/信息熵1.jpg" width = 80% height = 80% />
+<img src="./pictures/信息熵1.jpg" width = 80% height = 80% />
 
 #### 信息量的定义_我的理解
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/DecisionTree/信息熵2.jpg" width = 80% height = 80% />
+<img src="./pictures/信息熵2.jpg" width = 80% height = 80% />
 
 #### 信息熵公式推导
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/DecisionTree/信息熵3.jpg" width = 80% height = 80% />
+<img src="./pictures/信息熵3.jpg" width = 80% height = 80% />
 
 ### 信息熵和信息增益有什么用
     信息增益的意义：
@@ -78,27 +78,27 @@
 ### 条件熵
 **在信息增益中，加入了某个属性特征，导致信息熵发生了变化**   
 **因此，我们引入了条件熵这个概念：**   
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/DecisionTree/条件熵.jpg" width = 80% height = 80% />
+<img src="./pictures/条件熵.jpg" width = 80% height = 80% />
 
 ### 信息熵使用示例
 
 **还是刚才的数据集，我们利用信息熵计算公司来计算不同特征下的信息熵**   
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/DecisionTree/信息熵示例1.jpg" width = 50% height = 50% />
+<img src="./pictures/信息熵示例1.jpg" width = 50% height = 50% />
 
 **可以看出原系统的信息熵为1**   
 **Age特征的条件熵为0.4**   
 **由Age特征带来的信息增益为0.6**
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/DecisionTree/信息熵示例2.jpg" width = 80% height = 80% />
+<img src="./pictures/信息熵示例2.jpg" width = 80% height = 80% />
 
 **分别计算剩下两个特征的条件熵**   
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/DecisionTree/信息熵示例3.jpg" width = 80% height = 80% />
+<img src="./pictures/信息熵示例3.jpg" width = 80% height = 80% />
 
 **结论：**   
     Age的条件熵最小，带来的信息最大，所以根节点按照Age特征进行分裂  
     同时，在将原样本按照规则进行分割，拆分成子样本  
     然后再继续计算子节点的条件熵，直到分完
     由此，即可生成我们一开始画出的决策树
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/DecisionTree/决策树1.jpg" width = 50% height = 50% />
+<img src="./pictures/决策树1.jpg" width = 50% height = 50% />
 
 ## 常用决策树算法
 

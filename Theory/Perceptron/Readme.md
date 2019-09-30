@@ -28,7 +28,7 @@
 
   **我们知道，感知机其实就是模拟一个单独的神经元的工作方式，得出一个是还是否的判断。**
   
-  <img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/感知机模型.png" width = 30% height = 30% />
+  <img src="./pictures/感知机模型.png" width = 30% height = 30% />
   
     输入:  X = (1, a1, a2, a3, ... , an) 
           W = (w0, w1, w2, w3, ... , wn)
@@ -39,7 +39,7 @@
 
   **我们将样本的特征向量在空间中表示出来，如下图二维的特征所示：**
   
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/点线面.png" width = 50% height = 50% />
+<img src="./pictures/点线面.png" width = 50% height = 50% />
 
   **在上图的问题中，感知机就是那一条线，我们要找的就说能够将问题分开的这这条‘线’**
 
@@ -66,19 +66,19 @@
 
 公式中的直线方程为 Ax+By+C=0，P点的坐标为(x0,y0)
 
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/点到直线距离公式.png" width = 20% height = 20% />
+<img src="./pictures/点到直线距离公式.png" width = 20% height = 20% />
     
 ### 2.2 点到面的距离
 假设超平面是 h=w⋅x+b，其中 w=(w0,w1,...wm), x=(x0,x1,...xm)，样本点 x′ 到超平面的距离如下：
 
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/点到平面.png" width = 20% height = 20% />
+<img src="./pictures/点到平面.png" width = 20% height = 20% />
 
 ## 3 感知机模型
 ### 3.1 感知机的数学表达
 
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/点到超平面.png" width = 40% height = 40% />
+<img src="./pictures/点到超平面.png" width = 40% height = 40% />
 
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/感知机定义公式.png" width = 30% height = 30% />
+<img src="./pictures/感知机定义公式.png" width = 30% height = 30% />
 
 ### 3.2 感知机的损失函数
 
@@ -92,7 +92,7 @@
 
 **因此，在感知机中，我们可以定义损失函数为：** 
 
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Theory/Perceptron/损失函数.png" width = 30% height = 30% />
+<img src="./pictures/损失函数.png" width = 30% height = 30% />
 
 **需要特别注意的是：** 
 

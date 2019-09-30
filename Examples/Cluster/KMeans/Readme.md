@@ -95,9 +95,9 @@ data = dataframe.drop_duplicates(keep='first').reset_index(drop=True)
 
 **连续特征分析:**
 
-<img src = 'https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Cluster/KMeans/latitude.jpg' width=80% height=80% />
+<img src = './pictures/latitude.jpg' width=80% height=80% />
 
-<img src = 'https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Cluster/KMeans/longitude.jpg' width=80% height=80% />
+<img src = './pictures/longitude.jpg' width=80% height=80% />
 
 **异常值:**
 
@@ -160,7 +160,7 @@ cls = KMeans(n_cluster).fit(data.loc[:,['longitude','latitude']])
     第四类 西南区域（云贵川陕甘宁等）
     第五类 西北区域（西藏、青海、新疆等）
     
-<img src = 'https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Cluster/KMeans/china_city.jpg' width=70% height=70% />
+<img src = './pictures/china_city.jpg' width=70% height=70% />
 
 ## 3 总结
 

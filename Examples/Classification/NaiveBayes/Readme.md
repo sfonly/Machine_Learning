@@ -99,19 +99,19 @@ print(data['category'].value_counts())
 
 **连续特征分析:**  
 
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/NaiveBayes/Alcohol.jpg)
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/NaiveBayes/Malic%20acid.jpg)
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/NaiveBayes/Ash.jpg)
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/NaiveBayes/Alcalinity%20of%20ash.jpg)
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/NaiveBayes/Magnesium.jpg)
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/NaiveBayes/Total%20phenols.jpg)
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/NaiveBayes/Flavanoid.jpg)
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/NaiveBayes/Nonflavanoid%20phenols.jpg)
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/NaiveBayes/Proanthocyanins.jpg)
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/NaiveBayes/Color%20intensity.jpg)
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/NaiveBayes/Hue.jpg)
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/NaiveBayes/OD280OD315%20of%20diluted%20wines.jpg)
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/NaiveBayes/Proline.jpg)
+![loss](./pictures/Alcohol.jpg)
+![loss](./pictures/Malic%20acid.jpg)
+![loss](./pictures/Ash.jpg)
+![loss](./pictures/Alcalinity%20of%20ash.jpg)
+![loss](./pictures/Magnesium.jpg)
+![loss](./pictures/Total%20phenols.jpg)
+![loss](./pictures/Flavanoid.jpg)
+![loss](./pictures/Nonflavanoid%20phenols.jpg)
+![loss](./pictures/Proanthocyanins.jpg)
+![loss](./pictures/Color%20intensity.jpg)
+![loss](./pictures/Hue.jpg)
+![loss](./pictures/OD280OD315%20of%20diluted%20wines.jpg)
+![loss](./pictures/Proline.jpg)
 
     通过盒须图可以看出，不同类别的红酒的成分还是有较大差别
     
@@ -170,7 +170,7 @@ def find_outlier(data,features,label,n):
     由于 Flavanoid 和 Total phenols 间相关性极高，并且和 Nonflavanoid phenols 呈极高的负相关性
     因此，可以认为存在一定的特征冗余，我们这里选择去除 Flavanoid
     
-<img src='https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/NaiveBayes/corr.jpg' width= 60% height= 60% />
+<img src='./pictures/corr.jpg' width= 60% height= 60% />
 
 **特征与类标号的相关性分析:**
 
@@ -198,7 +198,7 @@ def find_outlier(data,features,label,n):
     
 **特征散点矩阵图:**
 
-<img src = 'https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/NaiveBayes/matrix.jpg' width= 70% height= 70% />
+<img src = './pictures/matrix.jpg' width= 70% height= 70% />
 
     可以看出，有一些特征间是线性相关的
     但是整体而言，所有特征都符合高斯分布

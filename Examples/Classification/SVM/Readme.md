@@ -142,13 +142,13 @@ def replaceNullvalues(data):
 
     根据皮尔逊相关系数分析，特征之间的相关性在 (-0.5, 0.5) 区间内，可以全部保留
 
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/SVM/corr.jpg" width = 60% height = 60% />
+<img src="./pictures/corr.jpg" width = 60% height = 60% />
 
 **连续特征分析:**
 
     通过绘制联系特征的散点矩阵图，可以发现这些联系特征呈现非线性的情况，判断正常人和患病人员很难通过单一特征进行判别
     
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/SVM/continues_features.jpg" width = 60% height = 60% />
+<img src="./pictures/continues_features.jpg" width = 60% height = 60% />
 
 **数据标准化:**
 
@@ -185,7 +185,7 @@ fn = 11 , tn = 52
 weighted avg       0.88      0.87      0.87       100
 ```
 
-<img src="https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/SVM/confusion_matrix.jpg" width = 40% height = 40% />
+<img src="./pictures/confusion_matrix.jpg" width = 40% height = 40% />
 
      这里评价的指标，首先是整个模型的准确率，在0.87左右（这个指标在本实验中，其实并不是特别重要）
      主要的原因是，我们要做的是找出可能患病的人群，而不是找出没有患病的人群

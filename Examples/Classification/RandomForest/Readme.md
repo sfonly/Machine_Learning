@@ -31,42 +31,98 @@
 
 **数据集描述:**
 
-|      |feature_name      | feature_type | structure | describe            |
-| ---- | :----:           | :----:       | :----:    | :----:              |
-| 0 | age                 | continues    | float     | 年龄                |
-| 1 | sex                 | discrete     | norminal  | 性别                |
-| 2 | chest_pain          | discrete     | norminal  | 是否胸痛             |
-| 3 | blood pressure      | continues    | float     | 血压                |
-| 4 | serum_cholestoral   | continues    | float     | 血液中胆固醇含量     |
-| 5 | fasting_blood_sugar | discrete     | norminal  | 空腹血糖             |
-| 6 | electrocardiographic| discrete     | norminal  | 心电图结果           |
-| 7 | max_heart_rate      | continues    | int       | 最大心跳数           |
-| 8 | induced_angina      | discrete     | norminal  | 运动心绞痛           |
-| 9 | ST_depression       | continues    | float     | ST段压力数值（心电图）|
-|10 | slope               | discrete     | norminal  | ST倾斜度（心电图）    |
-|11 | vessels             | discrete     | norminal  | 透视看到的血管数      |
-|12 | thal                | discrete     | norminal  | 缺陷类型             |
-|13 | diagnosis           | discrete     | norminal  | 心血管疾病类型        |
-
+|   |  feature_name  | feature_type | structure | describe             |
+| - | :----:         | :----:       | :----:    | :----:               |
+| 0 | PassengerID    | continues    | int       | 乘客ID               |
+| 1 | Survival       | discrete     | int       | 是否存活              |
+| 2 | Pclass         | continues    | norminal  | 船舱登记              |
+| 3 | Name           | discrete     | norminal  | 名                   |
+| 4 | FirstName      | discrete     | norminal  | 姓                   |
+| 5 | Sex            | discrete     | norminal  | 性别                 |
+| 6 | Age            | continues    | int       | 年龄                 |
+| 7 | SibSp          | continues    | int       | 船上兄弟姐妹/配偶的数量|
+| 8 | Parch          | discrete     | norminal  | 船上父母子女的数量     |
+| 9 | Ticket         | discrete     | norminal  | 船票名称              |
+|10 | Fare           | continues    | float     | 船票的价格            |
+|11 | Cabin          | discrete     | norminal  | 客舱号码              |
+|12 | Embarked       | discrete     | norminal  | 上传港口              |
 
 
 **预测值描述:**
-
-
+``` python
+print('Survived:', dataSet[dataSet['Survived'] == 1].shape[0])
+print('Not Survived:',dataSet[dataSet['Survived'] == 0].shape[0])
+Survived: 490
+Not Survived: 806
+```
 
 
 ### 2.2 案例实验
 
 #### 2.2.1 数据预处理
-    
-**去除空值:**
 
+
+**数据集整体描述分析:**
+``` python
+RangeIndex: 1309 entries, 0 to 1308
+Data columns (total 13 columns):
+PassengerId    1309 non-null int64
+Survived       1309 non-null int64
+Pclass         1309 non-null int64
+Name           1309 non-null object
+FamilyName     1309 non-null object
+Sex            1309 non-null object
+Age            1046 non-null float64
+SibSp          1309 non-null int64
+Parch          1309 non-null int64
+Ticket         1309 non-null object
+Fare           1308 non-null float64
+Cabin          295 non-null object
+Embarked       1307 non-null object
+dtypes: float64(2), int64(5), object(6)
+memory usage: 133.0+ KB
+None
+PassengerId       0
+Survived          0
+Pclass            0
+Name              0
+FamilyName        0
+Sex               0
+Age             263
+SibSp             0
+Parch             0
+Ticket            0
+Fare              1
+Cabin          1014
+Embarked          2
+dtype: int64
+```
+
+
+**去除异常值:**  
+
+``` python
+line: 27, Age: 19.0, SibSp: 3, Parch: 2, Fare: 263.0
+line: 88, Age: 23.0, SibSp: 3, Parch: 2, Fare: 263.0
+line: 159, Age: nan, SibSp: 8, Parch: 2, Fare: 69.55
+line: 180, Age: nan, SibSp: 8, Parch: 2, Fare: 69.55
+line: 201, Age: nan, SibSp: 8, Parch: 2, Fare: 69.55
+line: 324, Age: nan, SibSp: 8, Parch: 2, Fare: 69.55
+line: 341, Age: 24.0, SibSp: 3, Parch: 2, Fare: 263.0
+line: 792, Age: nan, SibSp: 8, Parch: 2, Fare: 69.55
+line: 846, Age: nan, SibSp: 8, Parch: 2, Fare: 69.55
+line: 863, Age: nan, SibSp: 8, Parch: 2, Fare: 69.55
+line: 944, Age: 28.0, SibSp: 3, Parch: 2, Fare: 263.0
+line: 1079, Age: nan, SibSp: 8, Parch: 2, Fare: 69.55
+line: 1251, Age: 14.5, SibSp: 8, Parch: 2, Fare: 69.55
+```
 
 
 #### 2.2.2 特征工程
 
 **特征相关性分析:**
 
+![loss](./)
     
 **连续特征分析:**
 

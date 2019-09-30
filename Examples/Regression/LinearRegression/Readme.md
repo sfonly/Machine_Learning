@@ -116,7 +116,7 @@ def show_corr(data):
 ```
     可以看出，特征间的相关性较强，其中RAD和TAX的相关性极高，达到了0.91
     这里二者保留其一即可，这里我们保留了TAX特征，去掉RAD特征
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Regression/LinearRegression/特征相关性.jpg)
+![loss](./pictures/特征相关性.jpg)
 
 **自变量-因变量关联性分析:**
 
@@ -124,15 +124,15 @@ def show_corr(data):
 
     DIS 和 MEDV
 
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Regression/LinearRegression/DIS.jpg)
+![loss](./pictures/DIS.jpg)
 
     LSTAT 和 MEDV
 
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Regression/LinearRegression/LSTAT.jpg)
+![loss](./pictures/LSTAT.jpg)
 
     RM 和 MEDV
 
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Regression/LinearRegression/RM.jpg)
+![loss](./pictures/RM.jpg)
 
 **去除异常值:**
 
@@ -199,11 +199,11 @@ Mean squared error:      10.82
     
 **归一化后预测值-真实值结果：**
 
-<img src='https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Regression/LinearRegression/归一化后.jpg' width = 60% height = 60% />
+<img src='./pictures/归一化后.jpg' width = 60% height = 60% />
     
 **标准化后预测值-真实值结果：**
 
-<img src='https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Regression/LinearRegression/标准差.jpg' width = 60% height = 60% />
+<img src='./pictures/标准差.jpg' width = 60% height = 60% />
 
 ## 3 总结
 

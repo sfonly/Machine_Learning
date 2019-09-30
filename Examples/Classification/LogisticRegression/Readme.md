@@ -104,61 +104,61 @@
 
     age 和 rich 的关系
     可以看出rich的人群和poor的人群在年龄阶段上存在比较明细的差异
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/age.jpg)
+![loss](./pictures/age.jpg)
 
     hours_per_week 和 rich 的关系
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/hours_per_week.jpg)
+![loss](./pictures/hours_per_week.jpg)
 
     capital_gain 和 rich 的关系
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/capital_gain.jpg)
+![loss](./pictures/capital_gain.jpg)
 
     capital_loss 和 rich 的关系
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/capital_loss.jpg)
+![loss](./pictures/capital_loss.jpg)
 
     education_num 和 rich 的关系
     可以看出，随着受教育年限的增加，富裕人群的比率也随之增加
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/education_num.jpg)
+![loss](./pictures/education_num.jpg)
 
 **离散特征:**
 
     workclass 和 rich 的关系
     根据不同workclass的情况，我这里将without-pay和never-worked归为一类，将state-gov、self-emp-not-inc、Local-gov归为一类
     然后对几类的特征做哑变量处理
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/workclass.jpg)
+![loss](./pictures/workclass.jpg)
     
     education 和 rich 的关系
     通workclass的处理方式类似，将概率接近的几种学历类型归为一类，然后按照由小到大进行编码，暂不做哑变量处理
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/education.jpg)
+![loss](./pictures/education.jpg)
 
     利用皮尔逊相关系数来看一下 education 编码过后，和education_num之间的关联性
     由于 education 和 education_num 的相关性极高，存在特征冗余，我们使用 education_num，并将 education 去除
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/edu_cor.jpg)
+![loss](./pictures/edu_cor.jpg)
 
     marital_status 和 rich 的关系
     这里也将marital_status分为了5类，然后做哑变量处理
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/marital_status.jpg)
+![loss](./pictures/marital_status.jpg)
 
     occupation 和 rich 的关系
     按照概率进行分箱，然后做哑变量
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/occupation.jpg)
+![loss](./pictures/occupation.jpg)
 
     relationship 和 rich 的关系
     按照概率进行分箱，然后做哑变量
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/relationship.jpg)
+![loss](./pictures/relationship.jpg)
 
     race 和 rich 的关系
     按照概率进行分箱，然后做哑变量，这里将亚裔和白人归位了一类，将印第安裔、黑人归为了一类，others为一类
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/race.jpg)
+![loss](./pictures/race.jpg)
 
     sex 和 rich 的关系
     可以看出性别和富裕程度有明细差别，美国职场性别歧视的严重？
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/sex.jpg)
+![loss](./pictures/sex.jpg)
 
     native_country 和 rich 的关系
     由于 native_country 中的国家裔族太多，然后不同裔族的富裕人群的比率差别比较明显
     我这里按照每增加5%富裕人群的情况进行分箱，最后分为10类
     （吐槽一下，印度裔是最高的，超过了45%，看来印度精英真的都移民了）
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/native_country.jpg)
+![loss](./pictures/native_country.jpg)
     
 **特征相关性:**
 
@@ -167,7 +167,7 @@
     含义是指 已婚配的状态，然后再看 relationship_4 中，其含义是 丈夫和妻子，很明显它门一一对应，因此存在特征冗余，我们选择保留relationship_4
     去除 marital_status_4
     # sex、race、workclass出现了较大的负相关性，这是由于做了哑变量后出现了，可以忽视
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/all_cor.jpg)
+![loss](./pictures/all_cor.jpg)
 
 **过采样:**
     
@@ -189,7 +189,7 @@
     
     最后，画了一下模型的ROC曲线，可以看到在FP取值0.2的时候，TP就达到0.85左右，在FP取值0.4时，TP达到了0.98以上
     ROC曲线的面积已经达到了0.93，这个模型已经很不错了
-![loss](https://github.com/sfonly/Machine_Learning/blob/master/img_folder/Examaples/Classification/LogisticRegression/ROC.jpg)
+![loss](./pictures/ROC.jpg)
 
 ## 3 总结
 
