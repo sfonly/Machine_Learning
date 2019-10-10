@@ -281,12 +281,12 @@ def preprocesing_Age(dataSet):
 
 **对特征进行哑变量处理:**
 
+    分别对Title、Ticket、Embarked、Pclass进行哑变量处理
 
 #### 2.2.3 模型训练与评估
 
 **利用网格参数和十择法寻找最优化参数:**  
 
-    设置网格参数，以及对十择法寻参的方法封装  
 ``` python
 # 设置随机森林模型参数网格
 rf_param_grid = {'max_depth' : [None],
@@ -320,14 +320,13 @@ def Kfold_RF(X_train, X_test, y_train, y_test, param_grid, k = 10):
     print('----------------------------------------')
 ```
 
-    结果
 ``` python
 ----------------------------------------
 best_estimator_:  RandomForestClassifier(bootstrap=False, class_weight=None, criterion='gini',
             max_depth=None, max_features=5, max_leaf_nodes=None,
             min_impurity_decrease=0.0, min_impurity_split=None,
             min_samples_leaf=4, min_samples_split=3,
-            min_weight_fraction_leaf=0.0, n_estimators=70, n_jobs=None,
+            min_weight_fraction_leaf=0.0, n_estimators=70,  n_jobs=None,
             oob_score=False, random_state=None, verbose=0,
             warm_start=False)
 ----------------------------------------
@@ -336,6 +335,10 @@ best_params_:  {'bootstrap': False, 'criterion': 'gini', 'max_depth': None, 'max
 best_score_:  0.8743109151047409
 ----------------------------------------
 ```
+
+    由于随机森林随机因子的原因，每次建立的模型不一定完全相同
+    最后，通过网格寻优得出的最优参数也会有变动
+    可以看出，网格法得到的最优参数的准确率为 87.43%
 
 **随机森林建模:**  
 ``` python
@@ -354,17 +357,35 @@ print('rfc_new.score(test):', rfc_new.score(X_test,y_test))
 rfc_new.score(train): 0.8930540242557883
 rfc_new.score(test): 0.8534704370179949
 ```
+
+    在十择法的基础上，对模型的参数微调后，进行随机森林的训练
+    最后模型的在训练集上的准确率为 89.3% 左右，在测试集上的准确率为 85.35% 左右
+
 #### 2.2.4 结果可视化 
 
 **学习曲线:**  
 ![loss](./pictures/RF_learning_curves.png)
 
+    模型的学习曲线如上图所示
+    红线和该区域为训练集的准确度
+    绿线和区域为十择法中测试集的准确度
+    最终二者趋于收敛，并且差距较小（0.02左右）
+
 **特征重要性排名:**  
 ![loss](./pictures/Features_Importance.png)  
    
+    这里只列出了前30个最重要的特征
     可以看出TL_1,TL_0,Sex是三个最重要的特征
+    TL_1是 Mr 普通男性, TL_2 是 Mrs 女性, Sex 是性别
+    因此，最重要的特征就是男女的差别
 
 ## 3 总结
 
+    随机森林是非常优秀的集成算法，准确率高、泛用性强
+    在建模的同时，还可以判断特征的重要性
+    因此，随机森林也可以用在特征选择中，从海量的特征中筛选出重要的特征供后续训练使用
 
-   
+    随机森林的基础树模型，一般采用CART，因此，随机森林也可以用于回归分析
+    对于随机森林的参数调整，一般只需要修改树的数量，因此，随机森林的训练过程也是比较简单的
+
+    随机森林有着非常多的优点，在实际生产过程中，也是应用非常广泛的算法之一
